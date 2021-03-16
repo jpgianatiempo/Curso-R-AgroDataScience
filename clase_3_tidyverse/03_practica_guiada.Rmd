@@ -1,0 +1,151 @@
+---
+title: "Tidyverse"
+output:
+  html_document:
+    df_print: paged
+    toc: yes
+  html_notebook:
+    toc: yes
+    toc_float: yes
+date: ''
+subtitle: PrÃ¡ctica Guiada
+---
+
+En esta ocasión utilizaremos los datos de las estimaciones del ministerio de agroindustria para utilizar todo lo que aprendimos sobre el `tidyverse`.
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+estimaciones <- read.table(file = '../datasets/Estimaciones.csv',sep=";", header = TRUE)
+```
+
+Hechamos un rápido vistazo a la base
+
+```{r}
+head(estimaciones)
+str(estimaciones)
+summary(estimaciones)
+```
+
+### Ejercicio 1: Creación del dataset
+
+> La columna *cultivo* es de tipo factor con 28 niveles. Queremos armar nuestro dataset con solamente 3 cultivos:Soja, Trigo y Maíz
+
+Necesitamos filtrar los datos y renombrar la nueva base con la que vamos a trabajar. Tengan en cuenta que el filtro tiene que estar escrito de la misma manera que se encuentra el registro. 
+
+```{r}
+Base <- estimaciones %>% 
+  filter(Cultivo == "Soja total" | Cultivo == "Trigo total" | Cultivo == "Maíz")
+
+head(Base)
+```
+
+### Ejercicio 2: Modificación de variables
+
+> El Rendimiento se encuentra en kg/ha, para una mayor facilidad de lectura queremos modificar la columna a *(qq/ha)*. Luego le cambiaremos el nombre a todas las columnas de medidas para incluir las unidades entre paréntesis.
+
+
+```{r}
+Base$Rendimiento..Kg.Ha. = Base$Rendimiento..Kg.Ha./100
+
+Base <- Base %>% 
+  rename("Rinde(qq/ha)" = Rendimiento..Kg.Ha.,
+         "Sembrada(ha)" = Sup..Sembrada..Ha.,
+         "Cosechada(ha)" = Sup..Cosechada..Ha.,
+         "Produccion(tn)" = Producción..Tn.)
+
+head(Base)
+```
+
+### Ejercicio 3: Seleccion de variables y reordenamiento
+
+> Reescribir la base con las siguientes columnas y respetando el orden:
+Provincia, Departamento, Cultivo, Campana, Sembrada(ha), Cosechada(ha), Rinde(qq/ha) y Produccion(tn).
+
+
+```{r}
+Base <-  Base %>% 
+  select(Provincia,Departamento,Cultivo,Campana,
+         `Sembrada(ha)`,`Cosechada(ha)`,`Rinde(qq/ha)`,
+         `Produccion(tn)`)
+
+head(Base)
+```
+
+### Ejercicio 4: Nuevas variables
+
+> Calcular el promedio, el máximo y el mínimo del *rinde* de cada cultivo y provincia. Presentar los datos ordenados según el rinde promedio.
+
+
+Necesitamos agrupar los casos de acuerdo a su tipo de cultivo y provincia, y calculamos los indicadores agregados solicitados. Luego, ordenamos los resultados.
+
+
+```{r}
+ejercicio4 <- Base %>% 
+  group_by(Provincia, Cultivo) %>% 
+  summarise(Rinde_Prom = mean(`Rinde(qq/ha)`),
+            Rinde_Max =  max(`Rinde(qq/ha)`),
+            Rinde_Min =  min(`Rinde(qq/ha)`)) %>% 
+  arrange(Rinde_Prom)
+
+
+ejercicio4
+```
+#### PLUS: Remover NA´s
+No lo vimos en la clase, pero muchas veces en las bases se utilizan 0 u otros valores cuando no deberia haber dato. En ese caso utilizaremos el siguiente código para reemplazarlos por **NA´s**.
+data[data == 0] <- NA
+
+*Tip:* Para reemplazar na con 0 realizar el siguiente código: data[is.na(data)] <- 0
+
+
+### Ejercicio 5: Join
+
+> Se desea generar un nuevo dataset que incorpore toda la base de datos y que adicionalmente se incorpore el rinde promedio, mínimo y máximo por cultivo y provincia (previamente calculado en el punto anterior).
+
+
+```{r}
+ejercicio5 <- left_join(Base, ejercicio4, by = c("Provincia", "Cultivo"))
+
+head(ejercicio5)
+```
+
+### Ejercicio 6: Case_when con agrupamiento
+
+> Generar una nueva variable en el dataset ejercicio2 que contenga una variable que tome valor “ALTO” cuando el rinde supera el valor promedio, “BAJO” cuando no e "IGUAL" cuando sean iguales. Luego se desea conocer cuáles provincias tuvieron un rinde superior al promedio para el cultivo de soja en la campaña 2018/19.
+
+
+```{r}
+ejercicio6 <- ejercicio5 %>%
+  mutate(Comparativo = case_when(`Rinde(qq/ha)` > Rinde_Prom ~ "ALTO",
+                                 `Rinde(qq/ha)` > Rinde_Prom ~ "BAJO",
+                                 TRUE ~ "IGUAL")) %>%
+    filter(Campana == "2018/19" & Comparativo == "ALTO" & Cultivo=="Soja total") %>%
+    group_by(Provincia) %>%
+  summarise()
+
+ejercicio6
+```
+
+### Ejercicio 7: Horizontal a vertical
+
+> Presentar los datos del ejercicio5 de forma tal que Rinde(qq/ha), Rinde_Max, Rinde_Min y Rinde_Prom sean valores de una variable llamada indicador, y los valores se encuentren en la variable valor. Luego seleccionar las columnas Provincia, Cultivo, Variable y Valor. Finalmente ordenarlas por Provincia.
+
+Utilizamos gather(), porque queremos transformar los datos de un formato “horizontal” a uno “vertical”.
+
+```{r}
+ejercicio7 <- ejercicio5 %>% gather(., 
+                                 key   = Variables,
+                                 value = Valores,
+                                 c(7,9:11)) %>% 
+  select(Provincia,Cultivo,Variables, Valores) %>%
+  arrange(Provincia)
+
+ejercicio7
+```
+
+
+
+
+
+
+
+

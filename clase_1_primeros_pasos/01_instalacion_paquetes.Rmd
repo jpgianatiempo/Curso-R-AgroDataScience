@@ -1,0 +1,217 @@
+---
+title: Instalación de paquetes
+output:
+  html_notebook:
+    toc: yes
+    toc_float: yes
+date: ""
+subtitle: "Curso: R para el análisis de datos en el agro"
+author: "Bolsa de Cereales"
+---
+
+### R para el análisis de datos
+El estándar científico para contestar preguntas o tomar decisiones es uno que se basa en el análisis de datos. Aquí consideramos técnicas cuantitativas: recolectar, organizar, entender, interpretar y extraer información de colecciones de datos predominantemente numéricos. Todas estas tareas son partes del análisis de datos, cuyo proceso podría resumirse con el siguiente diagrama:
+
+![Data Science](img/DataScience.png){width=1000}
+
+Es importante la forma en que nos movemos dentro de estos procesos en el análisis de datos y en este curso buscamos dar herramientas para facilitar cumplir los siguientes principios:
+
+- __Reproducibilidad__: Debe ser posible reproducir el análisis en todos sus pasos, en cualquier momento.
+
+- __Claridad__: Los pasos del análisis deben estar documentados apropiadamente, de manera que las decisiones importantes puedan ser entendidas y explicadas claramente.
+
+Dedicaremos las primeras sesiones a aprender herramientas básicas para poder movernos agilmente a lo largo de las etapas de análisis utilizando R y nos enfocaremos en los paquetes: __tidyverse__ y __ggplot2__.
+
+### Instalación de paquetes complementarios al R Base          
+
+Hasta aquí hemos visto múltiples funciones que están contenidas dentro del lenguaje básico de R. Ahora bien, al tratarse de un software libre, los usuarios de R con más experiencia contribuyen sistemáticamente a expandir este lenguaje mediante la creación y actualización de __paquetes__ complementarios. Lógicamente, los mismos no están incluidos en la instalación inicial del programa, pero podemos descargarlos e instalarlos al mismo tiempo con el siguiente comando:   
+``` 
+install.packages("nombre_del_paquete") 
+```
+Resulta recomendable __ejecutar este comando desde la consola__ ya que sólo necesitaremos correrlo una vez en nuestra computadora. Al ejecutar el mismo, se descargarán de la pagina de [CRAN](www.cran.r-project.org) los archivos correspondientes al paquete hacia el directorio en donde hayamos instalado el programa. Típicamente los archivos se encontrarán en __`C:\Program Files\R\R-4.0.4\library\`__, siempre con la versión del programa correspondiente.              
+Una vez instalado el paquete, cada vez que abramos una nueva sesión de R y querramos utilizar el mismo debemos **cargarlo al ambiente de trabajo** mediante la siguiente función:
+``` 
+library(nombre_del_paquete)
+```
+Nótese que al cargar/activar el paquete no son necesarias las comillas. RStudio trata de hacernos la vida más simple, así que cuando empezamos a escribir se despliega un menú con posibles opciones que indican el nombre de la función y el paquete al que está asociada (en este caso, es una función de R `{base}`). Lo que aparece en amarillo es la estructura de la función, algo sobre lo que hablaremos más adelante y que se puede acceder con mayor detalle presionando _F1_.
+
+![Sugerencia de función](img/sugerencia_funcion.png){width=1000}
+
+Lo mismo ocurre cuando empezamos a escribir el nombre del paquete. RStudio nos va ofreciendo sugerencias a partir de los paquetes que tenemos instalados: 
+
+![Sugerencia de argumento](img/sugerencia_argumento.png){width=1000}
+
+Todavía no hemos 'ejecutado' el código, así que nada ha pasado. Como todo en R, hay varias opciones para hacer esto. 
+Si hacemos clic en el botón _Run_ que está en la barra del script, se ejecutará la línea de código en la que está actualmente el cursor y este se moverá automáticamente a la siguiente línea. Eso mismo podemos hacerlo usando el atajo de teclado `ctrl` + `enter` (si estás en Linux o Windows) o `comando` + `enter` si estás en Mac. 
+
+Cuando queremos ejecutar más de una línea de código, lo que podemos hacer es seleccionar todo el fragmento y hacer clic sobre Run o usar el atajo del teclado. 
+
+¡Ejecutemos el código `library(tidyverse)` y veamos qué pasa! (recuerden que tienen que haber ejecutado previamente el código de instalación `install.packages("tidyverse")`)
+
+![Ejecución de tidyverse](img/ejecucion_tidy.png){width=1000}
+
+
+Cuando ejecutamos el código de nuestro script, este pasa a la consola y nos da dos avisos. El primero, cuáles son todos los paquetes que estamos cargando al cargar el `tidyverse`. Como veremos después, este es un megapaquete que incluye otros paquetes en su interior. Al llamarlos a través de `library(tidyverse)` se activan estos 8 paquetes que aparecen consignados (pese a que el Tidyverse incluye más). Eso es lo que nos está avisando R en la consola. El otro aviso es de un "Conflicto". Nos dice que las funciones `filter()`y `lag()` del paquete `dplyr` tienen el mismo nombre que funciones del paquete `stats` (que es parte de R base). Como cargamos `dplyr`después (al instalar `tidyverse`), lo que R nos avisa es que son las funciones de este último paquete las que van a prevalecer por sobre las del paquete `stats`.
+
+__IMPORTANTE__: Lo que hicimos recién fue carga el paquete __para esta sesión__ de R que estamos ejecutando actualmente. Si en algún momento cerraras el programa y retomaras este tutorial en otro momento, tendrías que volver a cargarlo. 
+
+### Buenas prácticas
+
+En este punto es importante sugerir dos buenas prácticas:
+
+1- Llamar todos los paquetes que ocuparemos al inicio de nuestro script. De este modo, cuando volvemos a trabajar con él más adelante (u otra persona quiere ejecutarlo) queda claro desde el principio qué paquetes se utilizan (y sería necesario descargar, en caso de no tenerlos). Obviamente, cuando comenzamos a escribir un script no siempre sabemos cuáles son todos los paquetes que necesitaremos. Por eso, si en la mitad del proceso decido usar un nuevo paquete, la buena práctica sería volver a las primeras líneas del script y agregarlo. 
+
+2- Comentar nuestro script. En R podemos agregar comentarios anteponiendo un `#` al fragmento que cumple esa función. En una línea de nuestro script, todo lo que está después de un `#` no se ejecuta como código. 
+
+¿Por qué es importante comentar nuestro script? Porque así podemos recordar qué es lo que un determinado fragmento de código hace, o podemos dejar registro de por qué realizamos algo de una determinada manera. Esto es muy útil para que nuestro futuro yo (o las personas con las que compartiremos nuestro script) entiendan lo que hicimos. 
+
+¡Los comentarios también son muy útiles cuando estamos aprendiendo! Probablemente en el futuro ya no necesites indicar que `library()` sirve para cargar paquetes, pero por ahora es una buena manera de ir registrando qué es lo que hace cada función. También es útil agregar al inicio de nuestro script una descripción de su objetivo o del contexto en que lo escribimos.
+
+Si te fijas, nuestro script aún dice Untitled1. Antes de seguir, es importante que lo guardemos. Y lo puedes hacer como en cualquier otro programa: con `Control/Comando` + `S`. RStudio te ofrecerá por defecto guardarlo en la carpeta de tu proyecto. Cuando ya esté guardado, te aparecerá en la pestaña _Files_.  
+
+![Guardado de script](img/guardar_script.png){width=1000}
+
+
+### Lectura y escritura de archivos
+
+#### .csv  y  .txt
+
+Hay __muchas__ funciones para leer archivos de tipo _.txt_ y _.csv_. La mayoría sólo cambia los parámetros que vienen por default. 
+
+Es importante tener en cuenta que una base de datos que proviene de archivos _.txt_, o _.csv_ puede presentar diferencias en cuanto a los siguientes parámetros:
+
+- encabezado
+- delimitador (```,```, tab, ```;```)
+- separador decimal 
+
+
+``` 
+dataframe <- read.delim(file, header = TRUE, sep = "\t", quote = "\"", dec = ".", fill = TRUE, comment.char = "", ...) 
+```
+
+Ejemplo. Levantar la base de [PAS-Bolsa de Cereales](https://www.bolsadecereales.com/download/informes/documento2/121).
+
+En el parametro `file` tengo que especificar el nombre completo del archivo, incluyendo el directorio donde se encuentra. Lo más sencillo es abrir comillas, apretar `Tab` y se despliega el menú de las cosas que tenemos en el directorio de trabajo. Si queremos movernos hacia arriba, agregamos `../`
+
+
+
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+estimaciones <- read.table(file = '../datasets/historico_pas_datasets.csv',sep=";", header = TRUE)
+
+dim(estimaciones)
+```
+
+
+Como puede observarse aquí, la base cuenta con 8 variables y 1351 registros.  
+Al trabajar con bases de microdatos, resulta conveniente contar con algunos comandos para tener una mirada rápida de la base, antes de comenzar a realizar los procesamientos que deseemos.     
+
+Veamos algunos de ellos:
+
+
+```{r}
+names(estimaciones)
+```
+
+```{r}
+summary(estimaciones)
+```
+
+```{r}
+head(estimaciones)
+```
+
+```{r}
+str(estimaciones)
+#otra opción glimpse(estimaciones)
+```
+
+
+#### Excel 
+
+
+Para leer y escribir archivos excel podemos utilizar los comandos que vienen con la librería _openxlsx_ o _readxl_.
+
+```{r,warning=FALSE}
+#Por única vez instalamos las librerias
+# install.packages("openxlsx")
+# install.packages("readxl")
+#Activamos las librerias
+library(openxlsx)
+# library(readxl)
+
+# creamos una tabla cualquiera de prueba
+x <- 1:10
+y <- 11:20
+tabla_de_R <- data.frame(x,y)
+
+# Me fijo donde voy a guardar el archivo.
+# getwd()
+# En caso de que no sea el deseado lo cambio con setwd()
+
+# escribimos el archivo
+write.xlsx(x = tabla_de_R, file = "../resultados/archivo.xlsx", row.names = FALSE)
+
+
+# Si queremos exportar multiples dataframes a un Excel, debemos armar previamente una lista de ellos. Cada dataframe se guardará en una pestaña de excel, cuyo nombre corresponderá al que definamos para cada Dataframe a la hora de crear la lista.
+Lista_a_exportar <- list("estimaciones agricolas" = estimaciones,
+                         "Tabla Numeros" = tabla_de_R)
+
+write.xlsx(x = Lista_a_exportar, file = "../resultados/archivo_2_hojas.xlsx", row.names = FALSE)
+
+# leemos el archivo especificando la ruta (o el directorio por default) y el nombre de la hoja que contiene los datos
+estimaciones <- read.xlsx(xlsxFile = "../resultados/archivo_2_hojas.xlsx", sheet = "estimaciones agricolas")
+
+# alternativamente podemos especificar el número de orden de la hoja que deseamos levantar
+estimaciones <- read.xlsx(xlsxFile = "../resultados/archivo_2_hojas.xlsx", sheet = 1)
+
+head(estimaciones)
+```
+
+#### Desde URL
+
+```{r}
+#En caso de ser un csv se puede importar directamente desde la url con el siguiente código:
+estimaciones <- read.csv("https://www.bolsadecereales.com/download/informes/documento2/121",sep=";", header = TRUE)
+head(estimaciones)
+```
+
+
+```{r}
+#En caso de ser un xls se puede importar directamente desde la url, pero primero debemos usar la librería httr. El siguiente código muestra como:
+library(readxl)
+library(httr)
+
+url1 <- "link.xls"
+GET(url1, write_disk(tf <- tempfile(fileext = ".xls")))
+nuevo <- read_excel(tf, 2L)
+
+```
+
+```{r}
+#Para leer archivos csv o xls desde un zip file de una url, podemos usar el siguiente código. En este ejemplo se descargan los datos del PSD-USDA:
+
+psdzip <- "psd_alldata_csv"
+urlPath <- "https://apps.fas.usda.gov/psdonline/downloads/"
+xlsFile <- paste0("psd_alldata.csv")
+zipFile <- paste0(psdzip,".zip")
+download.file(paste0(urlPath,zipFile),zipFile)
+unzip(zipFile)
+unlink(zipFile)
+```
+
+
+#### RDS
+```{r}
+#Para leer archivos en formato RDS, se puede utilizar la siguiente función:
+
+#de R Base
+readRDS()
+
+#de readr
+read_rds()
+
+#Para grabar los archivos usar:
+write_rds()
+
+```

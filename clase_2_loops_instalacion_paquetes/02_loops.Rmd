@@ -1,0 +1,258 @@
+---
+title: "Loops: for / if / while"
+output:
+  html_notebook:
+    toc: yes
+    toc_float: yes
+date: ""
+subtitle: "Curso: R para el análisis de datos en el agro"
+author: "Bolsa de Cereales"
+---
+
+### ¿Qué es un loop?
+En esta clase vamos a aprender a escribir los códigos básicos para hacer loops en R. Como es un curso inicial, esta preparado para personas que no están familiarizadas con la sintáxis básica de R.
+
+Conceptualmente, un loop es una forma de repetir una secuencia de instrucciones en determinadas condiciones. Permiten automatizar partes del código que necesitan repetirse. ¿Suena raro? No se preocupen, se volverá más claro una vez que comencemos a trabajar con algunos ejemplos a continuación.
+
+Antes de sumergirse en la escritura de loops en R, hay una cosa importante que deben saber. Al navegar por la web, a menudo leerá que se debe evitar el uso de loops en R. ¿Por qué? Bueno, eso se debe a que R admite la vectorización. En pocas palabras, esto permite cálculos mucho más rápidos. Por ejemplo, las soluciones que utilizan loops son menos eficientes que las soluciones vectorizadas que utilizan funciones de aplicación, como __lapply__ y __sapply__. A menudo es mejor utilizar este último. Sin embargo, como principiante en R, es bueno tener un conocimiento básico de los loops y cómo escribirlos.
+
+
+### For loop en R
+
+Volvamos al significado conceptual de un loop. Supongamos que deseamos hacer varias impresiones de la siguiente forma: Este año es [año], donde [año] es igual a 2015, 2016, hasta 2020. Esto puede hacerse de la siguiente manera:
+
+```{r}
+print(paste("Este año es", 2015))
+
+print(paste("Este año es", 2016))
+
+print(paste("Este año es", 2017))
+
+print(paste("Este año es", 2018))
+
+print(paste("Este año es", 2019))
+
+print(paste("Este año es", 2020))
+
+```
+
+Inmediatamente se puede observar que esto es bastante tedioso: repite el mismo fragmento de código una y otra vez. En este caso, al hacer uso de un loop for en R, puede automatizar la parte repetitiva:
+
+```{r}
+for (año in c(2015,2016,2017,2018,2019,2020)){
+  print(paste("Este año es", año))
+}
+
+```
+
+La mejor manera de entender lo que está sucediendo en el loop _for_ es leerlo de la siguiente manera: “Para cada año que está en la secuencia `c (2015,2016,2017,2018,2019,2020)`, ejecuta el código chunk `print (paste ("Este año es", año))`. Una vez que el loop _for_ ha ejecutado el fragmento de código para cada año en el vector, el ciclo se detiene y pasa a la primera instrucción después del bloque del ciclo.
+
+Al usar un loop _for_, solo necesita escribir su fragmento de código una vez (en lugar de seis veces). El ciclo for luego ejecuta la declaración una vez para cada valor proporcionado (los diferentes años que proporcionamos) y establece la variable (año en este caso) en ese valor. Incluso puede simplificar el código aún más escribiendo `2010: 2015`.
+
+```{r}
+for (año in 2015:2020){
+  print(paste("Este año es", año))
+}
+
+```
+
+### If - Else en R
+
+Supongamos que estamos viendo los pronósticos climáticos para la campaña 2020/21 Argentina. Podríamos decir que se podrían obtener los siguientes resultados:
+
+- Niña
+- Neutral
+
+Ahora bien, dado que solo hay dos resultados posibles. Si el pronóstico es _Niña_, la producción se reduciría un 10%. Si es un año _Neutral_, la producción se incrementaría un 2%.
+
+Comencemos por intentar representar este escenario en R. Podemos usar una declaración if para escribir el impacto sobre la producción.
+
+Las declaraciones If le dicen a R que ejecute una línea de código si una condición devuelve VERDADERA. Un enunciado if es una buena opción aquí porque nos permite controlar qué enunciado se imprime según el resultado que se produzca.
+
+La condición de nuestra declaración if debe ser una expresión que se evalúe como VERDADERO o FALSO. Si la expresión devuelve VERDADERO, el programa ejecutará todo el código entre corchetes {}. Si es FALSE, no se ejecutará ningún código.
+
+Veamos el ejemplo que mencionamos arriba:
+
+```{r}
+pronostico <- "Niña"
+efecto_niña <- "-10%"
+efecto_neutral <- "2%"
+
+if (pronostico == "Niña"){
+  print (paste0("El impacto sobre la producción es del ",efecto_niña))
+}
+
+```
+
+#### Agregando Else Statement
+
+Vimos una condición que indicaba el impacto sobre la producción que solamente establecía que pasa cuando el pronóstico es _Niña_. ¿Pero qué pasaría si es _Neutra_?
+
+Con el anterior código no se imprimirá nada. Debido a que la instrucción if se evalúa como falsa y entonces el bloque de código dentro de la instrucción if no se ejecuta.
+
+Si queremos poder manejar ambas ramas condicionales (True y False) agregaremos una declaración else para convertir esto en lo que a menudo se llama una declaración _if-else_. 
+
+En R, una declaración if-else le dice al programa que ejecute un bloque de código si la declaración condicional es VERDADERA, y un bloque de código diferente si es FALSO. Veamos como quedaría nuestro código if-else:
+
+```{r}
+pronostico <- "Neutral"
+efecto_niña <- "-10%"
+efecto_neutral <- "2%"
+
+if (pronostico == "Niña"){
+  print (paste0("El impacto sobre la producción es del ",efecto_niña))
+} else {
+  print( paste0("El impacto sobre la producción es del ",efecto_neutral))
+  }
+
+```
+
+#### Más allá de dos ramas condicionales
+
+Hasta ahora, hemos trabajado bajo el supuesto de que cada una de las decisiones en nuestra estructura de control tenía solo dos ramas: una correspondiente a VERDADERO y otra a FALSO. Hay muchas ocasiones en las que tenemos más de dos, ya que algunas decisiones no se reducen a un "Sí" frente a un "No".
+
+Supongamos que existen posibilidades de que el pronóstico sea un año _Niño_ y este tenga un impacto sobre la producción del 5%. Nuestro último bloque de código no tiene en cuenta esto. 
+
+Afortunadamente, R proporciona una forma de incorporar más de dos ramas en una instrucción if con la palabra clave _else if_. La palabra clave else if proporciona otro bloque de código para usar en una declaración if, y podemos tener tantos como consideremos adecuados. Así nuestro nuevo ejemplo quedaría:
+
+```{r}
+
+pronostico <- "Niño"
+efecto_niña <- "-10%"
+efecto_neutral <- "2%"
+efecto_niño <- "5%"
+
+if (pronostico == "Niña"){
+  print (paste0("El impacto sobre la producción es del ",efecto_niña))
+} else if (pronostico == "Neutral"){
+  print( paste0("El impacto sobre la producción es del ",efecto_neutral))
+} else {
+  print( paste0("El impacto sobre la producción es del ",efecto_niño))
+}
+
+
+```
+
+### If-Else en un For loop en R
+
+Ahora que hemos aprendido sobre if-else y for loops en R, podemos llevar las cosas al siguiente nivel y usar declaraciones if-else dentro de nuestros for loops para darnos los resultados de múltiples coincidencias.
+
+Para combinar dos estructuras de control, colocaremos una estructura de control entre los corchetes {} de otra.
+
+Comenzaremos con estos resultados de partidos para team_A:
+
+```{r}
+pronosticos <- list("2015"="Niño","2016"="Niño","2017"="Niña","2018"="Neutral","2019"="Neutral","2020"="Niña")
+efecto_niña <- "-10%"
+efecto_neutral <- "2%"
+efecto_niño <- "5%"
+
+for (pronostic in pronosticos){
+  print(pronostic)
+}
+
+```
+
+Esta vez, en lugar de imprimir nuestros resultados, agreguemos una declaración if-else en el ciclo for. Continuemos con los ejemplos previos, si el pronóstico es neutral 2%, niña -10% y niño 5%. 
+
+Al indexar en la coincidencia de variables iterables, podemos usar [] o [[]] ya que el iterable es un vector, no una lista.
+
+```{r}
+pronosticos <- list("2015"="Niño","2016"="Niño","2017"="Niña","2018"="Neutral","2019"="Neutral","2020"="Niña")
+efecto_niña <- "-10%"
+efecto_neutral <- "2%"
+efecto_niño <- "5%"
+
+for (pronostic in pronosticos){
+  if (pronostic == "Niña"){
+  print (paste0("Pronóstico ", pronostic, ". El impacto sobre la producción es del ",efecto_niña))
+} else if (pronostic == "Neutral"){
+  print( paste0("Pronóstico ",pronostic,". El impacto sobre la producción es del ",efecto_neutral))
+} else {
+  print( paste0("Pronóstico ",pronostic,". El impacto sobre la producción es del ",efecto_niño))
+}
+}
+
+```
+
+#### Rompiendo el for loop
+
+Ahora que hemos agregado una declaración if-else, veamos cómo detener un for loop en R en función de una determinada condición. En nuestro caso, podemos usar una declaración de interrupción para detener el ciclo tan pronto como veamos que la producción disminuye o en este caso el pronóstico es año _Niña_.
+
+Usando el ciclo for que escribimos arriba, podemos insertar la declaración break dentro de nuestra declaración if-else.
+
+```{r}
+for (pronostic in pronosticos){
+  if (pronostic == "Niña"){
+  print (paste0("Pronóstico ", pronostic, ". El impacto sobre la producción es del ",efecto_niña))
+    break
+} else if (pronostic == "Neutral"){
+  print( paste0("Pronóstico ",pronostic,". El impacto sobre la producción es del ",efecto_neutral))
+} else {
+  print( paste0("Pronóstico ",pronostic,". El impacto sobre la producción es del ",efecto_niño))
+}
+}
+
+```
+
+### While loop en R
+
+En el ejercicio anterior, usamos un for loop en R para repetir un fragmento de código que nos dio el resultado de la coincidencia. En esta sección veremos un caso parecido, el _while_ loop. La principal difrencia es que un while loop comprobará una condición lógica y seguirá ejecutando el ciclo siempre que la condición sea verdadera, cuando es falsa se termina el ciclo.
+
+Si la condición en el _while_ loop es siempre verdadera, el ciclo while será un ciclo infinito y nuestro programa nunca dejará de ejecutarse. ¡Esto es algo que definitivamente queremos evitar! Al escribir un ciclo while en R, queremos asegurarnos de que en algún momento la condición sea falsa para que el ciclo deje de ejecutarse.
+
+Veamos el siguiente ejemplo donde tenemos la variable _año_ que es igual a 2015, y un _while_ loop que corre siempre que el año sea menor a 2021. Para asegurarnos que sea un ciclo finito vamos a ir sumandole 1 a nuestra variable año cada vez que haga un ciclo. Al mismo tiempo hacemos que imprima que año es y cuántos faltan para el 2021:
+
+```{r}
+año <- 2015
+while (año < 2021){
+    print (paste0("Es el año ", año,". Faltan ",2021-año ," años para el 2021"))
+    año <- año + 1
+}
+```
+
+No se preocupe si todo este proceso parece abrumador, los loops en R requieren tiempo para comprenderlos, pero son herramientas poderosas una vez que se dominan. Hay muchas variables diferentes para hacer malabares, pero la clave para comprender el ciclo while es saber cómo cambian estas variables cada vez que se ejecuta el ciclo.
+
+
+#### If-Else statement en un while loop
+
+Ahora que imprimimos el año cuando todavía no es el 2021, agregaremos una función que imprima cuando efectivamente es el 2021. 
+
+Para hacer esto, necesitaremos agregar una instrucción if-else en nuestro ciclo while. Agregar una instrucción if-else en un bucle while es lo mismo que agregarla a un for loop, lo cual ya hemos hecho. 
+
+El condicional if-else irá entre los corchetes del while loop, en el mismo lugar que lo pusimos en el bucle for anteriormente.
+
+```{r}
+
+año <- 2015
+while (año <= 2021){
+  if (año < 2021){
+    print (paste0("Es el año ", año,". Faltan ",2021-año ," años para el 2021"))
+  } else {
+    print("Es el año 2021")
+  }
+  año <- año + 1
+}
+
+```
+
+#### Breaks en while loop
+
+Digamos que el número máximo del año que se puede alcanzar es 2025, pero con alcanzar 2021 es suficiente para terminar el ciclo.
+
+Para hacer esto, podemos usar otra declaración de ruptura. Nuevamente, esto funciona de la misma manera en un ciclo while que en un ciclo for; una vez que se cumple la condición y se ejecuta la ruptura, el ciclo finaliza.
+
+```{r}
+
+año <- 2015
+while (año <= 2025){
+  if (año < 2021){
+    print (paste0("Es el año ", año,". Faltan ",2021-año ," años para el 2021"))
+  } else {
+    print("Es el año 2021")
+    break
+  }
+  año <- año + 1
+}
+
+```

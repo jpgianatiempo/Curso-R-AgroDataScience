@@ -380,29 +380,258 @@ div.tocify {
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<div id="excel" class="section level4">
-<h4>Excel</h4>
-<p>Para leer y escribir archivos excel podemos utilizar los comandos que vienen con la librería <em>openxlsx</em> o <em>readxl</em>.</p>
+</div>
+<div id="if---else-en-r" class="section level3">
+<h3>If - Else en R</h3>
+<p>Supongamos que estamos viendo los pronósticos climáticos para la campaña 2020/21 Argentina. Podríamos decir que se podrían obtener los siguientes resultados:</p>
+<ul>
+<li>Niña</li>
+<li>Neutral</li>
+</ul>
+<p>Ahora bien, dado que solo hay dos resultados posibles. Si el pronóstico es <em>Niña</em>, la producción se reduciría un 10%. Si es un año <em>Neutral</em>, la producción se incrementaría un 2%.</p>
+<p>Comencemos por intentar representar este escenario en R. Podemos usar una declaración if para escribir el impacto sobre la producción.</p>
+<p>Las declaraciones If le dicen a R que ejecute una línea de código si una condición devuelve VERDADERA. Un enunciado if es una buena opción aquí porque nos permite controlar qué enunciado se imprime según el resultado que se produzca.</p>
+<p>La condición de nuestra declaración if debe ser una expresión que se evalúe como VERDADERO o FALSO. Si la expresión devuelve VERDADERO, el programa ejecutará todo el código entre corchetes {}. Si es FALSE, no se ejecutará ningún código.</p>
+<p>Veamos el ejemplo que mencionamos arriba:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI1BhcmEgbGVlciBhcmNoaXZvcyBlbiBmb3JtYXRvIFJEUywgc2UgcHVlZGUgdXRpbGl6YXIgbGEgc2lndWllbnRlIGZ1bmNpw7NuOlxuXG4jZGUgUiBCYXNlXG5yZWFkUkRTKClcblxuI2RlIHJlYWRyXG5yZWFkX3JkcygpXG5cbiNQYXJhIGdyYWJhciBsb3MgYXJjaGl2b3MgdXNhcjpcbndyaXRlX3JkcygpXG5cbmBgYCJ9 -->
-<pre class="r"><code>#Para leer archivos en formato RDS, se puede utilizar la siguiente función:
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJvbm9zdGljbyA8LSBcIk5pw7FhXCJcbmVmZWN0b19uacOxYSA8LSBcIi0xMCVcIlxuZWZlY3RvX25ldXRyYWwgPC0gXCIyJVwiXG5cbmlmIChwcm9ub3N0aWNvID09IFwiTmnDsWFcIil7XG4gIHByaW50IChwYXN0ZTAoXCJFbCBpbXBhY3RvIHNvYnJlIGxhIHByb2R1Y2Npw7NuIGVzIGRlbCBcIixlZmVjdG9fbmnDsWEpKVxufVxuYGBgIn0= -->
+<pre class="r"><code>pronostico &lt;- &quot;Niña&quot;
+efecto_niña &lt;- &quot;-10%&quot;
+efecto_neutral &lt;- &quot;2%&quot;
 
-#de R Base
-readRDS()
+if (pronostico == &quot;Niña&quot;){
+  print (paste0(&quot;El impacto sobre la producción es del &quot;,efecto_niña))
+}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiRWwgaW1wYWN0byBzb2JyZSBsYSBwcm9kdWNjacOzbiBlcyBkZWwgLTEwJVwiXG4ifQ== -->
+<pre><code>[1] &quot;El impacto sobre la producción es del -10%&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<div id="agregando-else-statement" class="section level4">
+<h4>Agregando Else Statement</h4>
+<p>Vimos una condición que indicaba el impacto sobre la producción que solamente establecía que pasa cuando el pronóstico es <em>Niña</em>. ¿Pero qué pasaría si es <em>Neutra</em>?</p>
+<p>Con el anterior código no se imprimirá nada. Debido a que la instrucción if se evalúa como falsa y entonces el bloque de código dentro de la instrucción if no se ejecuta.</p>
+<p>Si queremos poder manejar ambas ramas condicionales (True y False) agregaremos una declaración else para convertir esto en lo que a menudo se llama una declaración <em>if-else</em>.</p>
+<p>En R, una declaración if-else le dice al programa que ejecute un bloque de código si la declaración condicional es VERDADERA, y un bloque de código diferente si es FALSO. Veamos como quedaría nuestro código if-else:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJvbm9zdGljbyA8LSBcIk5ldXRyYWxcIlxuZWZlY3RvX25pw7FhIDwtIFwiLTEwJVwiXG5lZmVjdG9fbmV1dHJhbCA8LSBcIjIlXCJcblxuaWYgKHByb25vc3RpY28gPT0gXCJOacOxYVwiKXtcbiAgcHJpbnQgKHBhc3RlMChcIkVsIGltcGFjdG8gc29icmUgbGEgcHJvZHVjY2nDs24gZXMgZGVsIFwiLGVmZWN0b19uacOxYSkpXG59IGVsc2Uge1xuICBwcmludCggcGFzdGUwKFwiRWwgaW1wYWN0byBzb2JyZSBsYSBwcm9kdWNjacOzbiBlcyBkZWwgXCIsZWZlY3RvX25ldXRyYWwpKVxuICB9XG5gYGAifQ== -->
+<pre class="r"><code>pronostico &lt;- &quot;Neutral&quot;
+efecto_niña &lt;- &quot;-10%&quot;
+efecto_neutral &lt;- &quot;2%&quot;
 
-#de readr
-read_rds()
+if (pronostico == &quot;Niña&quot;){
+  print (paste0(&quot;El impacto sobre la producción es del &quot;,efecto_niña))
+} else {
+  print( paste0(&quot;El impacto sobre la producción es del &quot;,efecto_neutral))
+  }</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiRWwgaW1wYWN0byBzb2JyZSBsYSBwcm9kdWNjacOzbiBlcyBkZWwgMiVcIlxuIn0= -->
+<pre><code>[1] &quot;El impacto sobre la producción es del 2%&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="más-allá-de-dos-ramas-condicionales" class="section level4">
+<h4>Más allá de dos ramas condicionales</h4>
+<p>Hasta ahora, hemos trabajado bajo el supuesto de que cada una de las decisiones en nuestra estructura de control tenía solo dos ramas: una correspondiente a VERDADERO y otra a FALSO. Hay muchas ocasiones en las que tenemos más de dos, ya que algunas decisiones no se reducen a un “Sí” frente a un “No”.</p>
+<p>Supongamos que existen posibilidades de que el pronóstico sea un año <em>Niño</em> y este tenga un impacto sobre la producción del 5%. Nuestro último bloque de código no tiene en cuenta esto.</p>
+<p>Afortunadamente, R proporciona una forma de incorporar más de dos ramas en una instrucción if con la palabra clave <em>else if</em>. La palabra clave else if proporciona otro bloque de código para usar en una declaración if, y podemos tener tantos como consideremos adecuados. Así nuestro nuevo ejemplo quedaría:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5wcm9ub3N0aWNvIDwtIFwiTmnDsW9cIlxuZWZlY3RvX25pw7FhIDwtIFwiLTEwJVwiXG5lZmVjdG9fbmV1dHJhbCA8LSBcIjIlXCJcbmVmZWN0b19uacOxbyA8LSBcIjUlXCJcblxuaWYgKHByb25vc3RpY28gPT0gXCJOacOxYVwiKXtcbiAgcHJpbnQgKHBhc3RlMChcIkVsIGltcGFjdG8gc29icmUgbGEgcHJvZHVjY2nDs24gZXMgZGVsIFwiLGVmZWN0b19uacOxYSkpXG59IGVsc2UgaWYgKHByb25vc3RpY28gPT0gXCJOZXV0cmFsXCIpe1xuICBwcmludCggcGFzdGUwKFwiRWwgaW1wYWN0byBzb2JyZSBsYSBwcm9kdWNjacOzbiBlcyBkZWwgXCIsZWZlY3RvX25ldXRyYWwpKVxufSBlbHNlIHtcbiAgcHJpbnQoIHBhc3RlMChcIkVsIGltcGFjdG8gc29icmUgbGEgcHJvZHVjY2nDs24gZXMgZGVsIFwiLGVmZWN0b19uacOxbykpXG59XG5gYGAifQ== -->
+<pre class="r"><code>
+pronostico &lt;- &quot;Niño&quot;
+efecto_niña &lt;- &quot;-10%&quot;
+efecto_neutral &lt;- &quot;2%&quot;
+efecto_niño &lt;- &quot;5%&quot;
 
-#Para grabar los archivos usar:
-write_rds()
+if (pronostico == &quot;Niña&quot;){
+  print (paste0(&quot;El impacto sobre la producción es del &quot;,efecto_niña))
+} else if (pronostico == &quot;Neutral&quot;){
+  print( paste0(&quot;El impacto sobre la producción es del &quot;,efecto_neutral))
+} else {
+  print( paste0(&quot;El impacto sobre la producción es del &quot;,efecto_niño))
+}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiRWwgaW1wYWN0byBzb2JyZSBsYSBwcm9kdWNjacOzbiBlcyBkZWwgNSVcIlxuIn0= -->
+<pre><code>[1] &quot;El impacto sobre la producción es del 5%&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+</div>
+<div id="if-else-en-un-for-loop-en-r" class="section level3">
+<h3>If-Else en un For loop en R</h3>
+<p>Ahora que hemos aprendido sobre if-else y for loops en R, podemos llevar las cosas al siguiente nivel y usar declaraciones if-else dentro de nuestros for loops para darnos los resultados de múltiples coincidencias.</p>
+<p>Para combinar dos estructuras de control, colocaremos una estructura de control entre los corchetes {} de otra.</p>
+<p>Comenzaremos con estos resultados de partidos para team_A:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZm9yIChwcm9ub3N0aWMgaW4gcHJvbm9zdGljb3Mpe1xuICBwcmludChwcm9ub3N0aWMpXG59XG5cbmBgYCJ9 -->
+<pre class="r"><code>for (pronostic in pronosticos){
+  print(pronostic)
+}
 </code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiTmnDsW9cIlxuWzFdIFwiTmnDsW9cIlxuWzFdIFwiTmnDsWFcIlxuWzFdIFwiTmV1dHJhbFwiXG5bMV0gXCJOZXV0cmFsXCJcblsxXSBcIk5pw7FhXCJcbiJ9 -->
+<pre><code>[1] &quot;Niño&quot;
+[1] &quot;Niño&quot;
+[1] &quot;Niña&quot;
+[1] &quot;Neutral&quot;
+[1] &quot;Neutral&quot;
+[1] &quot;Niña&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Esta vez, en lugar de imprimir nuestros resultados, agreguemos una declaración if-else en el ciclo for. Continuemos con los ejemplos previos, si el pronóstico es neutral 2%, niña -10% y niño 5%.</p>
+<p>Al indexar en la coincidencia de variables iterables, podemos usar [] o [[]] ya que el iterable es un vector, no una lista.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJvbm9zdGljb3MgPC0gbGlzdChcIjIwMTVcIj1cIk5pw7FvXCIsXCIyMDE2XCI9XCJOacOxb1wiLFwiMjAxN1wiPVwiTmnDsWFcIixcIjIwMThcIj1cIk5ldXRyYWxcIixcIjIwMTlcIj1cIk5ldXRyYWxcIixcIjIwMjBcIj1cIk5pw7FhXCIpXG5lZmVjdG9fbmnDsWEgPC0gXCItMTAlXCJcbmVmZWN0b19uZXV0cmFsIDwtIFwiMiVcIlxuZWZlY3RvX25pw7FvIDwtIFwiNSVcIlxuXG5mb3IgKHByb25vc3RpYyBpbiBwcm9ub3N0aWNvcyl7XG4gIGlmIChwcm9ub3N0aWMgPT0gXCJOacOxYVwiKXtcbiAgcHJpbnQgKHBhc3RlMChcIlByb27Ds3N0aWNvIFwiLCBwcm9ub3N0aWMsIFwiLiBFbCBpbXBhY3RvIHNvYnJlIGxhIHByb2R1Y2Npw7NuIGVzIGRlbCBcIixlZmVjdG9fbmnDsWEpKVxufSBlbHNlIGlmIChwcm9ub3N0aWMgPT0gXCJOZXV0cmFsXCIpe1xuICBwcmludCggcGFzdGUwKFwiUHJvbsOzc3RpY28gXCIscHJvbm9zdGljLFwiLiBFbCBpbXBhY3RvIHNvYnJlIGxhIHByb2R1Y2Npw7NuIGVzIGRlbCBcIixlZmVjdG9fbmV1dHJhbCkpXG59IGVsc2Uge1xuICBwcmludCggcGFzdGUwKFwiUHJvbsOzc3RpY28gXCIscHJvbm9zdGljLFwiLiBFbCBpbXBhY3RvIHNvYnJlIGxhIHByb2R1Y2Npw7NuIGVzIGRlbCBcIixlZmVjdG9fbmnDsW8pKVxufVxufVxuYGBgIn0= -->
+<pre class="r"><code>pronosticos &lt;- list(&quot;2015&quot;=&quot;Niño&quot;,&quot;2016&quot;=&quot;Niño&quot;,&quot;2017&quot;=&quot;Niña&quot;,&quot;2018&quot;=&quot;Neutral&quot;,&quot;2019&quot;=&quot;Neutral&quot;,&quot;2020&quot;=&quot;Niña&quot;)
+efecto_niña &lt;- &quot;-10%&quot;
+efecto_neutral &lt;- &quot;2%&quot;
+efecto_niño &lt;- &quot;5%&quot;
+
+for (pronostic in pronosticos){
+  if (pronostic == &quot;Niña&quot;){
+  print (paste0(&quot;Pronóstico &quot;, pronostic, &quot;. El impacto sobre la producción es del &quot;,efecto_niña))
+} else if (pronostic == &quot;Neutral&quot;){
+  print( paste0(&quot;Pronóstico &quot;,pronostic,&quot;. El impacto sobre la producción es del &quot;,efecto_neutral))
+} else {
+  print( paste0(&quot;Pronóstico &quot;,pronostic,&quot;. El impacto sobre la producción es del &quot;,efecto_niño))
+}
+}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiUHJvbsOzc3RpY28gTmnDsW8uIEVsIGltcGFjdG8gc29icmUgbGEgcHJvZHVjY2nDs24gZXMgZGVsIDUlXCJcblsxXSBcIlByb27Ds3N0aWNvIE5pw7FvLiBFbCBpbXBhY3RvIHNvYnJlIGxhIHByb2R1Y2Npw7NuIGVzIGRlbCA1JVwiXG5bMV0gXCJQcm9uw7NzdGljbyBOacOxYS4gRWwgaW1wYWN0byBzb2JyZSBsYSBwcm9kdWNjacOzbiBlcyBkZWwgLTEwJVwiXG5bMV0gXCJQcm9uw7NzdGljbyBOZXV0cmFsLiBFbCBpbXBhY3RvIHNvYnJlIGxhIHByb2R1Y2Npw7NuIGVzIGRlbCAyJVwiXG5bMV0gXCJQcm9uw7NzdGljbyBOZXV0cmFsLiBFbCBpbXBhY3RvIHNvYnJlIGxhIHByb2R1Y2Npw7NuIGVzIGRlbCAyJVwiXG5bMV0gXCJQcm9uw7NzdGljbyBOacOxYS4gRWwgaW1wYWN0byBzb2JyZSBsYSBwcm9kdWNjacOzbiBlcyBkZWwgLTEwJVwiXG4ifQ== -->
+<pre><code>[1] &quot;Pronóstico Niño. El impacto sobre la producción es del 5%&quot;
+[1] &quot;Pronóstico Niño. El impacto sobre la producción es del 5%&quot;
+[1] &quot;Pronóstico Niña. El impacto sobre la producción es del -10%&quot;
+[1] &quot;Pronóstico Neutral. El impacto sobre la producción es del 2%&quot;
+[1] &quot;Pronóstico Neutral. El impacto sobre la producción es del 2%&quot;
+[1] &quot;Pronóstico Niña. El impacto sobre la producción es del -10%&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<div id="rompiendo-el-for-loop" class="section level4">
+<h4>Rompiendo el for loop</h4>
+<p>Ahora que hemos agregado una declaración if-else, veamos cómo detener un for loop en R en función de una determinada condición. En nuestro caso, podemos usar una declaración de interrupción para detener el ciclo tan pronto como veamos que la producción disminuye o en este caso el pronóstico es año <em>Niña</em>.</p>
+<p>Usando el ciclo for que escribimos arriba, podemos insertar la declaración break dentro de nuestra declaración if-else.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZm9yIChwcm9ub3N0aWMgaW4gcHJvbm9zdGljb3Mpe1xuICBpZiAocHJvbm9zdGljID09IFwiTmnDsWFcIil7XG4gIHByaW50IChwYXN0ZTAoXCJQcm9uw7NzdGljbyBcIiwgcHJvbm9zdGljLCBcIi4gRWwgaW1wYWN0byBzb2JyZSBsYSBwcm9kdWNjacOzbiBlcyBkZWwgXCIsZWZlY3RvX25pw7FhKSlcbiAgICBicmVha1xufSBlbHNlIGlmIChwcm9ub3N0aWMgPT0gXCJOZXV0cmFsXCIpe1xuICBwcmludCggcGFzdGUwKFwiUHJvbsOzc3RpY28gXCIscHJvbm9zdGljLFwiLiBFbCBpbXBhY3RvIHNvYnJlIGxhIHByb2R1Y2Npw7NuIGVzIGRlbCBcIixlZmVjdG9fbmV1dHJhbCkpXG59IGVsc2Uge1xuICBwcmludCggcGFzdGUwKFwiUHJvbsOzc3RpY28gXCIscHJvbm9zdGljLFwiLiBFbCBpbXBhY3RvIHNvYnJlIGxhIHByb2R1Y2Npw7NuIGVzIGRlbCBcIixlZmVjdG9fbmnDsW8pKVxufVxufVxuYGBgIn0= -->
+<pre class="r"><code>for (pronostic in pronosticos){
+  if (pronostic == &quot;Niña&quot;){
+  print (paste0(&quot;Pronóstico &quot;, pronostic, &quot;. El impacto sobre la producción es del &quot;,efecto_niña))
+    break
+} else if (pronostic == &quot;Neutral&quot;){
+  print( paste0(&quot;Pronóstico &quot;,pronostic,&quot;. El impacto sobre la producción es del &quot;,efecto_neutral))
+} else {
+  print( paste0(&quot;Pronóstico &quot;,pronostic,&quot;. El impacto sobre la producción es del &quot;,efecto_niño))
+}
+}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiUHJvbsOzc3RpY28gTmnDsW8uIEVsIGltcGFjdG8gc29icmUgbGEgcHJvZHVjY2nDs24gZXMgZGVsIDUlXCJcblsxXSBcIlByb27Ds3N0aWNvIE5pw7FvLiBFbCBpbXBhY3RvIHNvYnJlIGxhIHByb2R1Y2Npw7NuIGVzIGRlbCA1JVwiXG5bMV0gXCJQcm9uw7NzdGljbyBOacOxYS4gRWwgaW1wYWN0byBzb2JyZSBsYSBwcm9kdWNjacOzbiBlcyBkZWwgLTEwJVwiXG4ifQ== -->
+<pre><code>[1] &quot;Pronóstico Niño. El impacto sobre la producción es del 5%&quot;
+[1] &quot;Pronóstico Niño. El impacto sobre la producción es del 5%&quot;
+[1] &quot;Pronóstico Niña. El impacto sobre la producción es del -10%&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+</div>
+<div id="while-loop-en-r" class="section level3">
+<h3>While loop en R</h3>
+<p>En el ejercicio anterior, usamos un for loop en R para repetir un fragmento de código que nos dio el resultado de la coincidencia. En esta sección veremos un caso parecido, el <em>while</em> loop. La principal difrencia es que un while loop comprobará una condición lógica y seguirá ejecutando el ciclo siempre que la condición sea verdadera, cuando es falsa se termina el ciclo.</p>
+<p>Si la condición en el <em>while</em> loop es siempre verdadera, el ciclo while será un ciclo infinito y nuestro programa nunca dejará de ejecutarse. ¡Esto es algo que definitivamente queremos evitar! Al escribir un ciclo while en R, queremos asegurarnos de que en algún momento la condición sea falsa para que el ciclo deje de ejecutarse.</p>
+<p>Veamos el siguiente ejemplo donde tenemos la variable <em>año</em> que es igual a 2015, y un <em>while</em> loop que corre siempre que el año sea menor a 2021. Para asegurarnos que sea un ciclo finito vamos a ir sumandole 1 a nuestra variable año cada vez que haga un ciclo. Al mismo tiempo hacemos que imprima que año es y cuántos faltan para el 2021:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYcOxbyA8LSAyMDE1XG53aGlsZSAoYcOxbyA8IDIwMjEpe1xuICAgIHByaW50IChwYXN0ZTAoXCJFcyBlbCBhw7FvIFwiLCBhw7FvLFwiLiBGYWx0YW4gXCIsMjAyMS1hw7FvICxcIiBhw7FvcyBwYXJhIGVsIDIwMjFcIikpXG4gICAgYcOxbyA8LSBhw7FvICsgMVxufVxuYGBgIn0= -->
+<pre class="r"><code>año &lt;- 2015
+while (año &lt; 2021){
+    print (paste0(&quot;Es el año &quot;, año,&quot;. Faltan &quot;,2021-año ,&quot; años para el 2021&quot;))
+    año &lt;- año + 1
+}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiRXMgZWwgYcOxbyAyMDE1LiBGYWx0YW4gNiBhw7FvcyBwYXJhIGVsIDIwMjFcIlxuWzFdIFwiRXMgZWwgYcOxbyAyMDE2LiBGYWx0YW4gNSBhw7FvcyBwYXJhIGVsIDIwMjFcIlxuWzFdIFwiRXMgZWwgYcOxbyAyMDE3LiBGYWx0YW4gNCBhw7FvcyBwYXJhIGVsIDIwMjFcIlxuWzFdIFwiRXMgZWwgYcOxbyAyMDE4LiBGYWx0YW4gMyBhw7FvcyBwYXJhIGVsIDIwMjFcIlxuWzFdIFwiRXMgZWwgYcOxbyAyMDE5LiBGYWx0YW4gMiBhw7FvcyBwYXJhIGVsIDIwMjFcIlxuWzFdIFwiRXMgZWwgYcOxbyAyMDIwLiBGYWx0YW4gMSBhw7FvcyBwYXJhIGVsIDIwMjFcIlxuIn0= -->
+<pre><code>[1] &quot;Es el año 2015. Faltan 6 años para el 2021&quot;
+[1] &quot;Es el año 2016. Faltan 5 años para el 2021&quot;
+[1] &quot;Es el año 2017. Faltan 4 años para el 2021&quot;
+[1] &quot;Es el año 2018. Faltan 3 años para el 2021&quot;
+[1] &quot;Es el año 2019. Faltan 2 años para el 2021&quot;
+[1] &quot;Es el año 2020. Faltan 1 años para el 2021&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>No se preocupe si todo este proceso parece abrumador, los loops en R requieren tiempo para comprenderlos, pero son herramientas poderosas una vez que se dominan. Hay muchas variables diferentes para hacer malabares, pero la clave para comprender el ciclo while es saber cómo cambian estas variables cada vez que se ejecuta el ciclo.</p>
+<div id="if-else-statement-en-un-while-loop" class="section level4">
+<h4>If-Else statement en un while loop</h4>
+<p>Ahora que imprimimos el año cuando todavía no es el 2021, agregaremos una función que imprima cuando efectivamente es el 2021.</p>
+<p>Para hacer esto, necesitaremos agregar una instrucción if-else en nuestro ciclo while. Agregar una instrucción if-else en un bucle while es lo mismo que agregarla a un for loop, lo cual ya hemos hecho.</p>
+<p>El condicional if-else irá entre los corchetes del while loop, en el mismo lugar que lo pusimos en el bucle for anteriormente.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5hw7FvIDwtIDIwMTVcbndoaWxlIChhw7FvIDw9IDIwMjEpe1xuICBpZiAoYcOxbyA8IDIwMjEpe1xuICAgIHByaW50IChwYXN0ZTAoXCJFcyBlbCBhw7FvIFwiLCBhw7FvLFwiLiBGYWx0YW4gXCIsMjAyMS1hw7FvICxcIiBhw7FvcyBwYXJhIGVsIDIwMjFcIikpXG4gIH0gZWxzZSB7XG4gICAgcHJpbnQoXCJFcyBlbCBhw7FvIDIwMjFcIilcbiAgfVxuICBhw7FvIDwtIGHDsW8gKyAxXG59XG5gYGAifQ== -->
+<pre class="r"><code>
+año &lt;- 2015
+while (año &lt;= 2021){
+  if (año &lt; 2021){
+    print (paste0(&quot;Es el año &quot;, año,&quot;. Faltan &quot;,2021-año ,&quot; años para el 2021&quot;))
+  } else {
+    print(&quot;Es el año 2021&quot;)
+  }
+  año &lt;- año + 1
+}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiRXMgZWwgYcOxbyAyMDE1LiBGYWx0YW4gNiBhw7FvcyBwYXJhIGVsIDIwMjFcIlxuWzFdIFwiRXMgZWwgYcOxbyAyMDE2LiBGYWx0YW4gNSBhw7FvcyBwYXJhIGVsIDIwMjFcIlxuWzFdIFwiRXMgZWwgYcOxbyAyMDE3LiBGYWx0YW4gNCBhw7FvcyBwYXJhIGVsIDIwMjFcIlxuWzFdIFwiRXMgZWwgYcOxbyAyMDE4LiBGYWx0YW4gMyBhw7FvcyBwYXJhIGVsIDIwMjFcIlxuWzFdIFwiRXMgZWwgYcOxbyAyMDE5LiBGYWx0YW4gMiBhw7FvcyBwYXJhIGVsIDIwMjFcIlxuWzFdIFwiRXMgZWwgYcOxbyAyMDIwLiBGYWx0YW4gMSBhw7FvcyBwYXJhIGVsIDIwMjFcIlxuWzFdIFwiRXMgZWwgYcOxbyAyMDIxXCJcbiJ9 -->
+<pre><code>[1] &quot;Es el año 2015. Faltan 6 años para el 2021&quot;
+[1] &quot;Es el año 2016. Faltan 5 años para el 2021&quot;
+[1] &quot;Es el año 2017. Faltan 4 años para el 2021&quot;
+[1] &quot;Es el año 2018. Faltan 3 años para el 2021&quot;
+[1] &quot;Es el año 2019. Faltan 2 años para el 2021&quot;
+[1] &quot;Es el año 2020. Faltan 1 años para el 2021&quot;
+[1] &quot;Es el año 2021&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="breaks-en-while-loop" class="section level4">
+<h4>Breaks en while loop</h4>
+<p>Digamos que el número máximo del año que se puede alcanzar es 2025, pero con alcanzar 2021 es suficiente para terminar el ciclo.</p>
+<p>Para hacer esto, podemos usar otra declaración de ruptura. Nuevamente, esto funciona de la misma manera en un ciclo while que en un ciclo for; una vez que se cumple la condición y se ejecuta la ruptura, el ciclo finaliza.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5hw7FvIDwtIDIwMTVcbndoaWxlIChhw7FvIDw9IDIwMjUpe1xuICBpZiAoYcOxbyA8IDIwMjEpe1xuICAgIHByaW50IChwYXN0ZTAoXCJFcyBlbCBhw7FvIFwiLCBhw7FvLFwiLiBGYWx0YW4gXCIsMjAyMS1hw7FvICxcIiBhw7FvcyBwYXJhIGVsIDIwMjFcIikpXG4gIH0gZWxzZSB7XG4gICAgcHJpbnQoXCJFcyBlbCBhw7FvIDIwMjFcIilcbiAgICBicmVha1xuICB9XG4gIGHDsW8gPC0gYcOxbyArIDFcbn1cbmBgYCJ9 -->
+<pre class="r"><code>
+año &lt;- 2015
+while (año &lt;= 2025){
+  if (año &lt; 2021){
+    print (paste0(&quot;Es el año &quot;, año,&quot;. Faltan &quot;,2021-año ,&quot; años para el 2021&quot;))
+  } else {
+    print(&quot;Es el año 2021&quot;)
+    break
+  }
+  año &lt;- año + 1
+}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiRXMgZWwgYcOxbyAyMDE1LiBGYWx0YW4gNiBhw7FvcyBwYXJhIGVsIDIwMjFcIlxuWzFdIFwiRXMgZWwgYcOxbyAyMDE2LiBGYWx0YW4gNSBhw7FvcyBwYXJhIGVsIDIwMjFcIlxuWzFdIFwiRXMgZWwgYcOxbyAyMDE3LiBGYWx0YW4gNCBhw7FvcyBwYXJhIGVsIDIwMjFcIlxuWzFdIFwiRXMgZWwgYcOxbyAyMDE4LiBGYWx0YW4gMyBhw7FvcyBwYXJhIGVsIDIwMjFcIlxuWzFdIFwiRXMgZWwgYcOxbyAyMDE5LiBGYWx0YW4gMiBhw7FvcyBwYXJhIGVsIDIwMjFcIlxuWzFdIFwiRXMgZWwgYcOxbyAyMDIwLiBGYWx0YW4gMSBhw7FvcyBwYXJhIGVsIDIwMjFcIlxuWzFdIFwiRXMgZWwgYcOxbyAyMDIxXCJcbiJ9 -->
+<pre><code>[1] &quot;Es el año 2015. Faltan 6 años para el 2021&quot;
+[1] &quot;Es el año 2016. Faltan 5 años para el 2021&quot;
+[1] &quot;Es el año 2017. Faltan 4 años para el 2021&quot;
+[1] &quot;Es el año 2018. Faltan 3 años para el 2021&quot;
+[1] &quot;Es el año 2019. Faltan 2 años para el 2021&quot;
+[1] &quot;Es el año 2020. Faltan 1 años para el 2021&quot;
+[1] &quot;Es el año 2021&quot;</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 </div>
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIkxvb3BzOiBmb3IgLyBpZiAvIHdoaWxlIg0Kb3V0cHV0Og0KICBodG1sX25vdGVib29rOg0KICAgIHRvYzogeWVzDQogICAgdG9jX2Zsb2F0OiB5ZXMNCmRhdGU6ICIiDQpzdWJ0aXRsZTogIkN1cnNvOiBSIHBhcmEgZWwgYW7DoWxpc2lzIGRlIGRhdG9zIGVuIGVsIGFncm8iDQphdXRob3I6ICJCb2xzYSBkZSBDZXJlYWxlcyINCi0tLQ0KDQojIyMgwr9RdcOpIGVzIHVuIGxvb3A/DQpFbiBlc3RhIGNsYXNlIHZhbW9zIGEgYXByZW5kZXIgYSBlc2NyaWJpciBsb3MgY8OzZGlnb3MgYsOhc2ljb3MgcGFyYSBoYWNlciBsb29wcyBlbiBSLiBDb21vIGVzIHVuIGN1cnNvIGluaWNpYWwsIGVzdGEgcHJlcGFyYWRvIHBhcmEgcGVyc29uYXMgcXVlIG5vIGVzdMOhbiBmYW1pbGlhcml6YWRhcyBjb24gbGEgc2ludMOheGlzIGLDoXNpY2EgZGUgUi4NCg0KQ29uY2VwdHVhbG1lbnRlLCB1biBsb29wIGVzIHVuYSBmb3JtYSBkZSByZXBldGlyIHVuYSBzZWN1ZW5jaWEgZGUgaW5zdHJ1Y2Npb25lcyBlbiBkZXRlcm1pbmFkYXMgY29uZGljaW9uZXMuIFBlcm1pdGVuIGF1dG9tYXRpemFyIHBhcnRlcyBkZWwgY8OzZGlnbyBxdWUgbmVjZXNpdGFuIHJlcGV0aXJzZS4gwr9TdWVuYSByYXJvPyBObyBzZSBwcmVvY3VwZW4sIHNlIHZvbHZlcsOhIG3DoXMgY2xhcm8gdW5hIHZleiBxdWUgY29tZW5jZW1vcyBhIHRyYWJhamFyIGNvbiBhbGd1bm9zIGVqZW1wbG9zIGEgY29udGludWFjacOzbi4NCg0KQW50ZXMgZGUgc3VtZXJnaXJzZSBlbiBsYSBlc2NyaXR1cmEgZGUgbG9vcHMgZW4gUiwgaGF5IHVuYSBjb3NhIGltcG9ydGFudGUgcXVlIGRlYmVuIHNhYmVyLiBBbCBuYXZlZ2FyIHBvciBsYSB3ZWIsIGEgbWVudWRvIGxlZXLDoSBxdWUgc2UgZGViZSBldml0YXIgZWwgdXNvIGRlIGxvb3BzIGVuIFIuIMK/UG9yIHF1w6k/IEJ1ZW5vLCBlc28gc2UgZGViZSBhIHF1ZSBSIGFkbWl0ZSBsYSB2ZWN0b3JpemFjacOzbi4gRW4gcG9jYXMgcGFsYWJyYXMsIGVzdG8gcGVybWl0ZSBjw6FsY3Vsb3MgbXVjaG8gbcOhcyByw6FwaWRvcy4gUG9yIGVqZW1wbG8sIGxhcyBzb2x1Y2lvbmVzIHF1ZSB1dGlsaXphbiBsb29wcyBzb24gbWVub3MgZWZpY2llbnRlcyBxdWUgbGFzIHNvbHVjaW9uZXMgdmVjdG9yaXphZGFzIHF1ZSB1dGlsaXphbiBmdW5jaW9uZXMgZGUgYXBsaWNhY2nDs24sIGNvbW8gX19sYXBwbHlfXyB5IF9fc2FwcGx5X18uIEEgbWVudWRvIGVzIG1lam9yIHV0aWxpemFyIGVzdGUgw7psdGltby4gU2luIGVtYmFyZ28sIGNvbW8gcHJpbmNpcGlhbnRlIGVuIFIsIGVzIGJ1ZW5vIHRlbmVyIHVuIGNvbm9jaW1pZW50byBiw6FzaWNvIGRlIGxvcyBsb29wcyB5IGPDs21vIGVzY3JpYmlybG9zLg0KDQoNCiMjIyBGb3IgbG9vcCBlbiBSDQoNClZvbHZhbW9zIGFsIHNpZ25pZmljYWRvIGNvbmNlcHR1YWwgZGUgdW4gbG9vcC4gU3Vwb25nYW1vcyBxdWUgZGVzZWFtb3MgaGFjZXIgdmFyaWFzIGltcHJlc2lvbmVzIGRlIGxhIHNpZ3VpZW50ZSBmb3JtYTogRXN0ZSBhw7FvIGVzIFthw7FvXSwgZG9uZGUgW2HDsW9dIGVzIGlndWFsIGEgMjAxNSwgMjAxNiwgaGFzdGEgMjAyMC4gRXN0byBwdWVkZSBoYWNlcnNlIGRlIGxhIHNpZ3VpZW50ZSBtYW5lcmE6DQoNCmBgYHtyfQ0KcHJpbnQocGFzdGUoIkVzdGUgYcOxbyBlcyIsIDIwMTUpKQ0KDQpwcmludChwYXN0ZSgiRXN0ZSBhw7FvIGVzIiwgMjAxNikpDQoNCnByaW50KHBhc3RlKCJFc3RlIGHDsW8gZXMiLCAyMDE3KSkNCg0KcHJpbnQocGFzdGUoIkVzdGUgYcOxbyBlcyIsIDIwMTgpKQ0KDQpwcmludChwYXN0ZSgiRXN0ZSBhw7FvIGVzIiwgMjAxOSkpDQoNCnByaW50KHBhc3RlKCJFc3RlIGHDsW8gZXMiLCAyMDIwKSkNCg0KYGBgDQoNCklubWVkaWF0YW1lbnRlIHNlIHB1ZWRlIG9ic2VydmFyIHF1ZSBlc3RvIGVzIGJhc3RhbnRlIHRlZGlvc286IHJlcGl0ZSBlbCBtaXNtbyBmcmFnbWVudG8gZGUgY8OzZGlnbyB1bmEgeSBvdHJhIHZlei4gRW4gZXN0ZSBjYXNvLCBhbCBoYWNlciB1c28gZGUgdW4gbG9vcCBmb3IgZW4gUiwgcHVlZGUgYXV0b21hdGl6YXIgbGEgcGFydGUgcmVwZXRpdGl2YToNCg0KYGBge3J9DQpmb3IgKGHDsW8gaW4gYygyMDE1LDIwMTYsMjAxNywyMDE4LDIwMTksMjAyMCkpew0KICBwcmludChwYXN0ZSgiRXN0ZSBhw7FvIGVzIiwgYcOxbykpDQp9DQoNCmBgYA0KDQpMYSBtZWpvciBtYW5lcmEgZGUgZW50ZW5kZXIgbG8gcXVlIGVzdMOhIHN1Y2VkaWVuZG8gZW4gZWwgbG9vcCBfZm9yXyBlcyBsZWVybG8gZGUgbGEgc2lndWllbnRlIG1hbmVyYTog4oCcUGFyYSBjYWRhIGHDsW8gcXVlIGVzdMOhIGVuIGxhIHNlY3VlbmNpYSBgYyAoMjAxNSwyMDE2LDIwMTcsMjAxOCwyMDE5LDIwMjApYCwgZWplY3V0YSBlbCBjw7NkaWdvIGNodW5rIGBwcmludCAocGFzdGUgKCJFc3RlIGHDsW8gZXMiLCBhw7FvKSlgLiBVbmEgdmV6IHF1ZSBlbCBsb29wIF9mb3JfIGhhIGVqZWN1dGFkbyBlbCBmcmFnbWVudG8gZGUgY8OzZGlnbyBwYXJhIGNhZGEgYcOxbyBlbiBlbCB2ZWN0b3IsIGVsIGNpY2xvIHNlIGRldGllbmUgeSBwYXNhIGEgbGEgcHJpbWVyYSBpbnN0cnVjY2nDs24gZGVzcHXDqXMgZGVsIGJsb3F1ZSBkZWwgY2ljbG8uDQoNCkFsIHVzYXIgdW4gbG9vcCBfZm9yXywgc29sbyBuZWNlc2l0YSBlc2NyaWJpciBzdSBmcmFnbWVudG8gZGUgY8OzZGlnbyB1bmEgdmV6IChlbiBsdWdhciBkZSBzZWlzIHZlY2VzKS4gRWwgY2ljbG8gZm9yIGx1ZWdvIGVqZWN1dGEgbGEgZGVjbGFyYWNpw7NuIHVuYSB2ZXogcGFyYSBjYWRhIHZhbG9yIHByb3BvcmNpb25hZG8gKGxvcyBkaWZlcmVudGVzIGHDsW9zIHF1ZSBwcm9wb3JjaW9uYW1vcykgeSBlc3RhYmxlY2UgbGEgdmFyaWFibGUgKGHDsW8gZW4gZXN0ZSBjYXNvKSBlbiBlc2UgdmFsb3IuIEluY2x1c28gcHVlZGUgc2ltcGxpZmljYXIgZWwgY8OzZGlnbyBhw7puIG3DoXMgZXNjcmliaWVuZG8gYDIwMTA6IDIwMTVgLg0KDQpgYGB7cn0NCmZvciAoYcOxbyBpbiAyMDE1OjIwMjApew0KICBwcmludChwYXN0ZSgiRXN0ZSBhw7FvIGVzIiwgYcOxbykpDQp9DQoNCmBgYA0KDQoNCg0KIyMjIyBFeGNlbCANCg0KDQpQYXJhIGxlZXIgeSBlc2NyaWJpciBhcmNoaXZvcyBleGNlbCBwb2RlbW9zIHV0aWxpemFyIGxvcyBjb21hbmRvcyBxdWUgdmllbmVuIGNvbiBsYSBsaWJyZXLDrWEgX29wZW54bHN4XyBvIF9yZWFkeGxfLg0KDQpgYGB7cn0NCiNQYXJhIGxlZXIgYXJjaGl2b3MgZW4gZm9ybWF0byBSRFMsIHNlIHB1ZWRlIHV0aWxpemFyIGxhIHNpZ3VpZW50ZSBmdW5jacOzbjoNCg0KI2RlIFIgQmFzZQ0KcmVhZFJEUygpDQoNCiNkZSByZWFkcg0KcmVhZF9yZHMoKQ0KDQojUGFyYSBncmFiYXIgbG9zIGFyY2hpdm9zIHVzYXI6DQp3cml0ZV9yZHMoKQ0KDQpgYGANCg==</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIkxvb3BzOiBmb3IgLyBpZiAvIHdoaWxlIg0Kb3V0cHV0Og0KICBodG1sX25vdGVib29rOg0KICAgIHRvYzogeWVzDQogICAgdG9jX2Zsb2F0OiB5ZXMNCmRhdGU6ICIiDQpzdWJ0aXRsZTogIkN1cnNvOiBSIHBhcmEgZWwgYW7DoWxpc2lzIGRlIGRhdG9zIGVuIGVsIGFncm8iDQphdXRob3I6ICJCb2xzYSBkZSBDZXJlYWxlcyINCi0tLQ0KDQojIyMgwr9RdcOpIGVzIHVuIGxvb3A/DQpFbiBlc3RhIGNsYXNlIHZhbW9zIGEgYXByZW5kZXIgYSBlc2NyaWJpciBsb3MgY8OzZGlnb3MgYsOhc2ljb3MgcGFyYSBoYWNlciBsb29wcyBlbiBSLiBDb21vIGVzIHVuIGN1cnNvIGluaWNpYWwsIGVzdGEgcHJlcGFyYWRvIHBhcmEgcGVyc29uYXMgcXVlIG5vIGVzdMOhbiBmYW1pbGlhcml6YWRhcyBjb24gbGEgc2ludMOheGlzIGLDoXNpY2EgZGUgUi4NCg0KQ29uY2VwdHVhbG1lbnRlLCB1biBsb29wIGVzIHVuYSBmb3JtYSBkZSByZXBldGlyIHVuYSBzZWN1ZW5jaWEgZGUgaW5zdHJ1Y2Npb25lcyBlbiBkZXRlcm1pbmFkYXMgY29uZGljaW9uZXMuIFBlcm1pdGVuIGF1dG9tYXRpemFyIHBhcnRlcyBkZWwgY8OzZGlnbyBxdWUgbmVjZXNpdGFuIHJlcGV0aXJzZS4gwr9TdWVuYSByYXJvPyBObyBzZSBwcmVvY3VwZW4sIHNlIHZvbHZlcsOhIG3DoXMgY2xhcm8gdW5hIHZleiBxdWUgY29tZW5jZW1vcyBhIHRyYWJhamFyIGNvbiBhbGd1bm9zIGVqZW1wbG9zIGEgY29udGludWFjacOzbi4NCg0KQW50ZXMgZGUgc3VtZXJnaXJzZSBlbiBsYSBlc2NyaXR1cmEgZGUgbG9vcHMgZW4gUiwgaGF5IHVuYSBjb3NhIGltcG9ydGFudGUgcXVlIGRlYmVuIHNhYmVyLiBBbCBuYXZlZ2FyIHBvciBsYSB3ZWIsIGEgbWVudWRvIGxlZXLDoSBxdWUgc2UgZGViZSBldml0YXIgZWwgdXNvIGRlIGxvb3BzIGVuIFIuIMK/UG9yIHF1w6k/IEJ1ZW5vLCBlc28gc2UgZGViZSBhIHF1ZSBSIGFkbWl0ZSBsYSB2ZWN0b3JpemFjacOzbi4gRW4gcG9jYXMgcGFsYWJyYXMsIGVzdG8gcGVybWl0ZSBjw6FsY3Vsb3MgbXVjaG8gbcOhcyByw6FwaWRvcy4gUG9yIGVqZW1wbG8sIGxhcyBzb2x1Y2lvbmVzIHF1ZSB1dGlsaXphbiBsb29wcyBzb24gbWVub3MgZWZpY2llbnRlcyBxdWUgbGFzIHNvbHVjaW9uZXMgdmVjdG9yaXphZGFzIHF1ZSB1dGlsaXphbiBmdW5jaW9uZXMgZGUgYXBsaWNhY2nDs24sIGNvbW8gX19sYXBwbHlfXyB5IF9fc2FwcGx5X18uIEEgbWVudWRvIGVzIG1lam9yIHV0aWxpemFyIGVzdGUgw7psdGltby4gU2luIGVtYmFyZ28sIGNvbW8gcHJpbmNpcGlhbnRlIGVuIFIsIGVzIGJ1ZW5vIHRlbmVyIHVuIGNvbm9jaW1pZW50byBiw6FzaWNvIGRlIGxvcyBsb29wcyB5IGPDs21vIGVzY3JpYmlybG9zLg0KDQoNCiMjIyBGb3IgbG9vcCBlbiBSDQoNClZvbHZhbW9zIGFsIHNpZ25pZmljYWRvIGNvbmNlcHR1YWwgZGUgdW4gbG9vcC4gU3Vwb25nYW1vcyBxdWUgZGVzZWFtb3MgaGFjZXIgdmFyaWFzIGltcHJlc2lvbmVzIGRlIGxhIHNpZ3VpZW50ZSBmb3JtYTogRXN0ZSBhw7FvIGVzIFthw7FvXSwgZG9uZGUgW2HDsW9dIGVzIGlndWFsIGEgMjAxNSwgMjAxNiwgaGFzdGEgMjAyMC4gRXN0byBwdWVkZSBoYWNlcnNlIGRlIGxhIHNpZ3VpZW50ZSBtYW5lcmE6DQoNCmBgYHtyfQ0KcHJpbnQocGFzdGUoIkVzdGUgYcOxbyBlcyIsIDIwMTUpKQ0KDQpwcmludChwYXN0ZSgiRXN0ZSBhw7FvIGVzIiwgMjAxNikpDQoNCnByaW50KHBhc3RlKCJFc3RlIGHDsW8gZXMiLCAyMDE3KSkNCg0KcHJpbnQocGFzdGUoIkVzdGUgYcOxbyBlcyIsIDIwMTgpKQ0KDQpwcmludChwYXN0ZSgiRXN0ZSBhw7FvIGVzIiwgMjAxOSkpDQoNCnByaW50KHBhc3RlKCJFc3RlIGHDsW8gZXMiLCAyMDIwKSkNCg0KYGBgDQoNCklubWVkaWF0YW1lbnRlIHNlIHB1ZWRlIG9ic2VydmFyIHF1ZSBlc3RvIGVzIGJhc3RhbnRlIHRlZGlvc286IHJlcGl0ZSBlbCBtaXNtbyBmcmFnbWVudG8gZGUgY8OzZGlnbyB1bmEgeSBvdHJhIHZlei4gRW4gZXN0ZSBjYXNvLCBhbCBoYWNlciB1c28gZGUgdW4gbG9vcCBmb3IgZW4gUiwgcHVlZGUgYXV0b21hdGl6YXIgbGEgcGFydGUgcmVwZXRpdGl2YToNCg0KYGBge3J9DQpmb3IgKGHDsW8gaW4gYygyMDE1LDIwMTYsMjAxNywyMDE4LDIwMTksMjAyMCkpew0KICBwcmludChwYXN0ZSgiRXN0ZSBhw7FvIGVzIiwgYcOxbykpDQp9DQoNCmBgYA0KDQpMYSBtZWpvciBtYW5lcmEgZGUgZW50ZW5kZXIgbG8gcXVlIGVzdMOhIHN1Y2VkaWVuZG8gZW4gZWwgbG9vcCBfZm9yXyBlcyBsZWVybG8gZGUgbGEgc2lndWllbnRlIG1hbmVyYTog4oCcUGFyYSBjYWRhIGHDsW8gcXVlIGVzdMOhIGVuIGxhIHNlY3VlbmNpYSBgYyAoMjAxNSwyMDE2LDIwMTcsMjAxOCwyMDE5LDIwMjApYCwgZWplY3V0YSBlbCBjw7NkaWdvIGNodW5rIGBwcmludCAocGFzdGUgKCJFc3RlIGHDsW8gZXMiLCBhw7FvKSlgLiBVbmEgdmV6IHF1ZSBlbCBsb29wIF9mb3JfIGhhIGVqZWN1dGFkbyBlbCBmcmFnbWVudG8gZGUgY8OzZGlnbyBwYXJhIGNhZGEgYcOxbyBlbiBlbCB2ZWN0b3IsIGVsIGNpY2xvIHNlIGRldGllbmUgeSBwYXNhIGEgbGEgcHJpbWVyYSBpbnN0cnVjY2nDs24gZGVzcHXDqXMgZGVsIGJsb3F1ZSBkZWwgY2ljbG8uDQoNCkFsIHVzYXIgdW4gbG9vcCBfZm9yXywgc29sbyBuZWNlc2l0YSBlc2NyaWJpciBzdSBmcmFnbWVudG8gZGUgY8OzZGlnbyB1bmEgdmV6IChlbiBsdWdhciBkZSBzZWlzIHZlY2VzKS4gRWwgY2ljbG8gZm9yIGx1ZWdvIGVqZWN1dGEgbGEgZGVjbGFyYWNpw7NuIHVuYSB2ZXogcGFyYSBjYWRhIHZhbG9yIHByb3BvcmNpb25hZG8gKGxvcyBkaWZlcmVudGVzIGHDsW9zIHF1ZSBwcm9wb3JjaW9uYW1vcykgeSBlc3RhYmxlY2UgbGEgdmFyaWFibGUgKGHDsW8gZW4gZXN0ZSBjYXNvKSBlbiBlc2UgdmFsb3IuIEluY2x1c28gcHVlZGUgc2ltcGxpZmljYXIgZWwgY8OzZGlnbyBhw7puIG3DoXMgZXNjcmliaWVuZG8gYDIwMTA6IDIwMTVgLg0KDQpgYGB7cn0NCmZvciAoYcOxbyBpbiAyMDE1OjIwMjApew0KICBwcmludChwYXN0ZSgiRXN0ZSBhw7FvIGVzIiwgYcOxbykpDQp9DQoNCmBgYA0KDQojIyMgSWYgLSBFbHNlIGVuIFINCg0KU3Vwb25nYW1vcyBxdWUgZXN0YW1vcyB2aWVuZG8gbG9zIHByb27Ds3N0aWNvcyBjbGltw6F0aWNvcyBwYXJhIGxhIGNhbXBhw7FhIDIwMjAvMjEgQXJnZW50aW5hLiBQb2Ryw61hbW9zIGRlY2lyIHF1ZSBzZSBwb2Ryw61hbiBvYnRlbmVyIGxvcyBzaWd1aWVudGVzIHJlc3VsdGFkb3M6DQoNCi0gTmnDsWENCi0gTmV1dHJhbA0KDQpBaG9yYSBiaWVuLCBkYWRvIHF1ZSBzb2xvIGhheSBkb3MgcmVzdWx0YWRvcyBwb3NpYmxlcy4gU2kgZWwgcHJvbsOzc3RpY28gZXMgX05pw7FhXywgbGEgcHJvZHVjY2nDs24gc2UgcmVkdWNpcsOtYSB1biAxMCUuIFNpIGVzIHVuIGHDsW8gX05ldXRyYWxfLCBsYSBwcm9kdWNjacOzbiBzZSBpbmNyZW1lbnRhcsOtYSB1biAyJS4NCg0KQ29tZW5jZW1vcyBwb3IgaW50ZW50YXIgcmVwcmVzZW50YXIgZXN0ZSBlc2NlbmFyaW8gZW4gUi4gUG9kZW1vcyB1c2FyIHVuYSBkZWNsYXJhY2nDs24gaWYgcGFyYSBlc2NyaWJpciBlbCBpbXBhY3RvIHNvYnJlIGxhIHByb2R1Y2Npw7NuLg0KDQpMYXMgZGVjbGFyYWNpb25lcyBJZiBsZSBkaWNlbiBhIFIgcXVlIGVqZWN1dGUgdW5hIGzDrW5lYSBkZSBjw7NkaWdvIHNpIHVuYSBjb25kaWNpw7NuIGRldnVlbHZlIFZFUkRBREVSQS4gVW4gZW51bmNpYWRvIGlmIGVzIHVuYSBidWVuYSBvcGNpw7NuIGFxdcOtIHBvcnF1ZSBub3MgcGVybWl0ZSBjb250cm9sYXIgcXXDqSBlbnVuY2lhZG8gc2UgaW1wcmltZSBzZWfDum4gZWwgcmVzdWx0YWRvIHF1ZSBzZSBwcm9kdXpjYS4NCg0KTGEgY29uZGljacOzbiBkZSBudWVzdHJhIGRlY2xhcmFjacOzbiBpZiBkZWJlIHNlciB1bmEgZXhwcmVzacOzbiBxdWUgc2UgZXZhbMO6ZSBjb21vIFZFUkRBREVSTyBvIEZBTFNPLiBTaSBsYSBleHByZXNpw7NuIGRldnVlbHZlIFZFUkRBREVSTywgZWwgcHJvZ3JhbWEgZWplY3V0YXLDoSB0b2RvIGVsIGPDs2RpZ28gZW50cmUgY29yY2hldGVzIHt9LiBTaSBlcyBGQUxTRSwgbm8gc2UgZWplY3V0YXLDoSBuaW5nw7puIGPDs2RpZ28uDQoNClZlYW1vcyBlbCBlamVtcGxvIHF1ZSBtZW5jaW9uYW1vcyBhcnJpYmE6DQoNCmBgYHtyfQ0KcHJvbm9zdGljbyA8LSAiTmnDsWEiDQplZmVjdG9fbmnDsWEgPC0gIi0xMCUiDQplZmVjdG9fbmV1dHJhbCA8LSAiMiUiDQoNCmlmIChwcm9ub3N0aWNvID09ICJOacOxYSIpew0KICBwcmludCAocGFzdGUwKCJFbCBpbXBhY3RvIHNvYnJlIGxhIHByb2R1Y2Npw7NuIGVzIGRlbCAiLGVmZWN0b19uacOxYSkpDQp9DQoNCmBgYA0KDQojIyMjIEFncmVnYW5kbyBFbHNlIFN0YXRlbWVudA0KDQpWaW1vcyB1bmEgY29uZGljacOzbiBxdWUgaW5kaWNhYmEgZWwgaW1wYWN0byBzb2JyZSBsYSBwcm9kdWNjacOzbiBxdWUgc29sYW1lbnRlIGVzdGFibGVjw61hIHF1ZSBwYXNhIGN1YW5kbyBlbCBwcm9uw7NzdGljbyBlcyBfTmnDsWFfLiDCv1Blcm8gcXXDqSBwYXNhcsOtYSBzaSBlcyBfTmV1dHJhXz8NCg0KQ29uIGVsIGFudGVyaW9yIGPDs2RpZ28gbm8gc2UgaW1wcmltaXLDoSBuYWRhLiBEZWJpZG8gYSBxdWUgbGEgaW5zdHJ1Y2Npw7NuIGlmIHNlIGV2YWzDumEgY29tbyBmYWxzYSB5IGVudG9uY2VzIGVsIGJsb3F1ZSBkZSBjw7NkaWdvIGRlbnRybyBkZSBsYSBpbnN0cnVjY2nDs24gaWYgbm8gc2UgZWplY3V0YS4NCg0KU2kgcXVlcmVtb3MgcG9kZXIgbWFuZWphciBhbWJhcyByYW1hcyBjb25kaWNpb25hbGVzIChUcnVlIHkgRmFsc2UpIGFncmVnYXJlbW9zIHVuYSBkZWNsYXJhY2nDs24gZWxzZSBwYXJhIGNvbnZlcnRpciBlc3RvIGVuIGxvIHF1ZSBhIG1lbnVkbyBzZSBsbGFtYSB1bmEgZGVjbGFyYWNpw7NuIF9pZi1lbHNlXy4gDQoNCkVuIFIsIHVuYSBkZWNsYXJhY2nDs24gaWYtZWxzZSBsZSBkaWNlIGFsIHByb2dyYW1hIHF1ZSBlamVjdXRlIHVuIGJsb3F1ZSBkZSBjw7NkaWdvIHNpIGxhIGRlY2xhcmFjacOzbiBjb25kaWNpb25hbCBlcyBWRVJEQURFUkEsIHkgdW4gYmxvcXVlIGRlIGPDs2RpZ28gZGlmZXJlbnRlIHNpIGVzIEZBTFNPLiBWZWFtb3MgY29tbyBxdWVkYXLDrWEgbnVlc3RybyBjw7NkaWdvIGlmLWVsc2U6DQoNCmBgYHtyfQ0KcHJvbm9zdGljbyA8LSAiTmV1dHJhbCINCmVmZWN0b19uacOxYSA8LSAiLTEwJSINCmVmZWN0b19uZXV0cmFsIDwtICIyJSINCg0KaWYgKHByb25vc3RpY28gPT0gIk5pw7FhIil7DQogIHByaW50IChwYXN0ZTAoIkVsIGltcGFjdG8gc29icmUgbGEgcHJvZHVjY2nDs24gZXMgZGVsICIsZWZlY3RvX25pw7FhKSkNCn0gZWxzZSB7DQogIHByaW50KCBwYXN0ZTAoIkVsIGltcGFjdG8gc29icmUgbGEgcHJvZHVjY2nDs24gZXMgZGVsICIsZWZlY3RvX25ldXRyYWwpKQ0KICB9DQoNCmBgYA0KDQojIyMjIE3DoXMgYWxsw6EgZGUgZG9zIHJhbWFzIGNvbmRpY2lvbmFsZXMNCg0KSGFzdGEgYWhvcmEsIGhlbW9zIHRyYWJhamFkbyBiYWpvIGVsIHN1cHVlc3RvIGRlIHF1ZSBjYWRhIHVuYSBkZSBsYXMgZGVjaXNpb25lcyBlbiBudWVzdHJhIGVzdHJ1Y3R1cmEgZGUgY29udHJvbCB0ZW7DrWEgc29sbyBkb3MgcmFtYXM6IHVuYSBjb3JyZXNwb25kaWVudGUgYSBWRVJEQURFUk8geSBvdHJhIGEgRkFMU08uIEhheSBtdWNoYXMgb2Nhc2lvbmVzIGVuIGxhcyBxdWUgdGVuZW1vcyBtw6FzIGRlIGRvcywgeWEgcXVlIGFsZ3VuYXMgZGVjaXNpb25lcyBubyBzZSByZWR1Y2VuIGEgdW4gIlPDrSIgZnJlbnRlIGEgdW4gIk5vIi4NCg0KU3Vwb25nYW1vcyBxdWUgZXhpc3RlbiBwb3NpYmlsaWRhZGVzIGRlIHF1ZSBlbCBwcm9uw7NzdGljbyBzZWEgdW4gYcOxbyBfTmnDsW9fIHkgZXN0ZSB0ZW5nYSB1biBpbXBhY3RvIHNvYnJlIGxhIHByb2R1Y2Npw7NuIGRlbCA1JS4gTnVlc3RybyDDumx0aW1vIGJsb3F1ZSBkZSBjw7NkaWdvIG5vIHRpZW5lIGVuIGN1ZW50YSBlc3RvLiANCg0KQWZvcnR1bmFkYW1lbnRlLCBSIHByb3BvcmNpb25hIHVuYSBmb3JtYSBkZSBpbmNvcnBvcmFyIG3DoXMgZGUgZG9zIHJhbWFzIGVuIHVuYSBpbnN0cnVjY2nDs24gaWYgY29uIGxhIHBhbGFicmEgY2xhdmUgX2Vsc2UgaWZfLiBMYSBwYWxhYnJhIGNsYXZlIGVsc2UgaWYgcHJvcG9yY2lvbmEgb3RybyBibG9xdWUgZGUgY8OzZGlnbyBwYXJhIHVzYXIgZW4gdW5hIGRlY2xhcmFjacOzbiBpZiwgeSBwb2RlbW9zIHRlbmVyIHRhbnRvcyBjb21vIGNvbnNpZGVyZW1vcyBhZGVjdWFkb3MuIEFzw60gbnVlc3RybyBudWV2byBlamVtcGxvIHF1ZWRhcsOtYToNCg0KYGBge3J9DQoNCnByb25vc3RpY28gPC0gIk5pw7FvIg0KZWZlY3RvX25pw7FhIDwtICItMTAlIg0KZWZlY3RvX25ldXRyYWwgPC0gIjIlIg0KZWZlY3RvX25pw7FvIDwtICI1JSINCg0KaWYgKHByb25vc3RpY28gPT0gIk5pw7FhIil7DQogIHByaW50IChwYXN0ZTAoIkVsIGltcGFjdG8gc29icmUgbGEgcHJvZHVjY2nDs24gZXMgZGVsICIsZWZlY3RvX25pw7FhKSkNCn0gZWxzZSBpZiAocHJvbm9zdGljbyA9PSAiTmV1dHJhbCIpew0KICBwcmludCggcGFzdGUwKCJFbCBpbXBhY3RvIHNvYnJlIGxhIHByb2R1Y2Npw7NuIGVzIGRlbCAiLGVmZWN0b19uZXV0cmFsKSkNCn0gZWxzZSB7DQogIHByaW50KCBwYXN0ZTAoIkVsIGltcGFjdG8gc29icmUgbGEgcHJvZHVjY2nDs24gZXMgZGVsICIsZWZlY3RvX25pw7FvKSkNCn0NCg0KDQpgYGANCg0KIyMjIElmLUVsc2UgZW4gdW4gRm9yIGxvb3AgZW4gUg0KDQpBaG9yYSBxdWUgaGVtb3MgYXByZW5kaWRvIHNvYnJlIGlmLWVsc2UgeSBmb3IgbG9vcHMgZW4gUiwgcG9kZW1vcyBsbGV2YXIgbGFzIGNvc2FzIGFsIHNpZ3VpZW50ZSBuaXZlbCB5IHVzYXIgZGVjbGFyYWNpb25lcyBpZi1lbHNlIGRlbnRybyBkZSBudWVzdHJvcyBmb3IgbG9vcHMgcGFyYSBkYXJub3MgbG9zIHJlc3VsdGFkb3MgZGUgbcO6bHRpcGxlcyBjb2luY2lkZW5jaWFzLg0KDQpQYXJhIGNvbWJpbmFyIGRvcyBlc3RydWN0dXJhcyBkZSBjb250cm9sLCBjb2xvY2FyZW1vcyB1bmEgZXN0cnVjdHVyYSBkZSBjb250cm9sIGVudHJlIGxvcyBjb3JjaGV0ZXMge30gZGUgb3RyYS4NCg0KQ29tZW56YXJlbW9zIGNvbiBlc3RvcyByZXN1bHRhZG9zIGRlIHBhcnRpZG9zIHBhcmEgdGVhbV9BOg0KDQpgYGB7cn0NCnByb25vc3RpY29zIDwtIGxpc3QoIjIwMTUiPSJOacOxbyIsIjIwMTYiPSJOacOxbyIsIjIwMTciPSJOacOxYSIsIjIwMTgiPSJOZXV0cmFsIiwiMjAxOSI9Ik5ldXRyYWwiLCIyMDIwIj0iTmnDsWEiKQ0KZWZlY3RvX25pw7FhIDwtICItMTAlIg0KZWZlY3RvX25ldXRyYWwgPC0gIjIlIg0KZWZlY3RvX25pw7FvIDwtICI1JSINCg0KZm9yIChwcm9ub3N0aWMgaW4gcHJvbm9zdGljb3Mpew0KICBwcmludChwcm9ub3N0aWMpDQp9DQoNCmBgYA0KDQpFc3RhIHZleiwgZW4gbHVnYXIgZGUgaW1wcmltaXIgbnVlc3Ryb3MgcmVzdWx0YWRvcywgYWdyZWd1ZW1vcyB1bmEgZGVjbGFyYWNpw7NuIGlmLWVsc2UgZW4gZWwgY2ljbG8gZm9yLiBDb250aW51ZW1vcyBjb24gbG9zIGVqZW1wbG9zIHByZXZpb3MsIHNpIGVsIHByb27Ds3N0aWNvIGVzIG5ldXRyYWwgMiUsIG5pw7FhIC0xMCUgeSBuacOxbyA1JS4gDQoNCkFsIGluZGV4YXIgZW4gbGEgY29pbmNpZGVuY2lhIGRlIHZhcmlhYmxlcyBpdGVyYWJsZXMsIHBvZGVtb3MgdXNhciBbXSBvIFtbXV0geWEgcXVlIGVsIGl0ZXJhYmxlIGVzIHVuIHZlY3Rvciwgbm8gdW5hIGxpc3RhLg0KDQpgYGB7cn0NCnByb25vc3RpY29zIDwtIGxpc3QoIjIwMTUiPSJOacOxbyIsIjIwMTYiPSJOacOxbyIsIjIwMTciPSJOacOxYSIsIjIwMTgiPSJOZXV0cmFsIiwiMjAxOSI9Ik5ldXRyYWwiLCIyMDIwIj0iTmnDsWEiKQ0KZWZlY3RvX25pw7FhIDwtICItMTAlIg0KZWZlY3RvX25ldXRyYWwgPC0gIjIlIg0KZWZlY3RvX25pw7FvIDwtICI1JSINCg0KZm9yIChwcm9ub3N0aWMgaW4gcHJvbm9zdGljb3Mpew0KICBpZiAocHJvbm9zdGljID09ICJOacOxYSIpew0KICBwcmludCAocGFzdGUwKCJQcm9uw7NzdGljbyAiLCBwcm9ub3N0aWMsICIuIEVsIGltcGFjdG8gc29icmUgbGEgcHJvZHVjY2nDs24gZXMgZGVsICIsZWZlY3RvX25pw7FhKSkNCn0gZWxzZSBpZiAocHJvbm9zdGljID09ICJOZXV0cmFsIil7DQogIHByaW50KCBwYXN0ZTAoIlByb27Ds3N0aWNvICIscHJvbm9zdGljLCIuIEVsIGltcGFjdG8gc29icmUgbGEgcHJvZHVjY2nDs24gZXMgZGVsICIsZWZlY3RvX25ldXRyYWwpKQ0KfSBlbHNlIHsNCiAgcHJpbnQoIHBhc3RlMCgiUHJvbsOzc3RpY28gIixwcm9ub3N0aWMsIi4gRWwgaW1wYWN0byBzb2JyZSBsYSBwcm9kdWNjacOzbiBlcyBkZWwgIixlZmVjdG9fbmnDsW8pKQ0KfQ0KfQ0KDQpgYGANCg0KIyMjIyBSb21waWVuZG8gZWwgZm9yIGxvb3ANCg0KQWhvcmEgcXVlIGhlbW9zIGFncmVnYWRvIHVuYSBkZWNsYXJhY2nDs24gaWYtZWxzZSwgdmVhbW9zIGPDs21vIGRldGVuZXIgdW4gZm9yIGxvb3AgZW4gUiBlbiBmdW5jacOzbiBkZSB1bmEgZGV0ZXJtaW5hZGEgY29uZGljacOzbi4gRW4gbnVlc3RybyBjYXNvLCBwb2RlbW9zIHVzYXIgdW5hIGRlY2xhcmFjacOzbiBkZSBpbnRlcnJ1cGNpw7NuIHBhcmEgZGV0ZW5lciBlbCBjaWNsbyB0YW4gcHJvbnRvIGNvbW8gdmVhbW9zIHF1ZSBsYSBwcm9kdWNjacOzbiBkaXNtaW51eWUgbyBlbiBlc3RlIGNhc28gZWwgcHJvbsOzc3RpY28gZXMgYcOxbyBfTmnDsWFfLg0KDQpVc2FuZG8gZWwgY2ljbG8gZm9yIHF1ZSBlc2NyaWJpbW9zIGFycmliYSwgcG9kZW1vcyBpbnNlcnRhciBsYSBkZWNsYXJhY2nDs24gYnJlYWsgZGVudHJvIGRlIG51ZXN0cmEgZGVjbGFyYWNpw7NuIGlmLWVsc2UuDQoNCmBgYHtyfQ0KZm9yIChwcm9ub3N0aWMgaW4gcHJvbm9zdGljb3Mpew0KICBpZiAocHJvbm9zdGljID09ICJOacOxYSIpew0KICBwcmludCAocGFzdGUwKCJQcm9uw7NzdGljbyAiLCBwcm9ub3N0aWMsICIuIEVsIGltcGFjdG8gc29icmUgbGEgcHJvZHVjY2nDs24gZXMgZGVsICIsZWZlY3RvX25pw7FhKSkNCiAgICBicmVhaw0KfSBlbHNlIGlmIChwcm9ub3N0aWMgPT0gIk5ldXRyYWwiKXsNCiAgcHJpbnQoIHBhc3RlMCgiUHJvbsOzc3RpY28gIixwcm9ub3N0aWMsIi4gRWwgaW1wYWN0byBzb2JyZSBsYSBwcm9kdWNjacOzbiBlcyBkZWwgIixlZmVjdG9fbmV1dHJhbCkpDQp9IGVsc2Ugew0KICBwcmludCggcGFzdGUwKCJQcm9uw7NzdGljbyAiLHByb25vc3RpYywiLiBFbCBpbXBhY3RvIHNvYnJlIGxhIHByb2R1Y2Npw7NuIGVzIGRlbCAiLGVmZWN0b19uacOxbykpDQp9DQp9DQoNCmBgYA0KDQojIyMgV2hpbGUgbG9vcCBlbiBSDQoNCkVuIGVsIGVqZXJjaWNpbyBhbnRlcmlvciwgdXNhbW9zIHVuIGZvciBsb29wIGVuIFIgcGFyYSByZXBldGlyIHVuIGZyYWdtZW50byBkZSBjw7NkaWdvIHF1ZSBub3MgZGlvIGVsIHJlc3VsdGFkbyBkZSBsYSBjb2luY2lkZW5jaWEuIEVuIGVzdGEgc2VjY2nDs24gdmVyZW1vcyB1biBjYXNvIHBhcmVjaWRvLCBlbCBfd2hpbGVfIGxvb3AuIExhIHByaW5jaXBhbCBkaWZyZW5jaWEgZXMgcXVlIHVuIHdoaWxlIGxvb3AgY29tcHJvYmFyw6EgdW5hIGNvbmRpY2nDs24gbMOzZ2ljYSB5IHNlZ3VpcsOhIGVqZWN1dGFuZG8gZWwgY2ljbG8gc2llbXByZSBxdWUgbGEgY29uZGljacOzbiBzZWEgdmVyZGFkZXJhLCBjdWFuZG8gZXMgZmFsc2Egc2UgdGVybWluYSBlbCBjaWNsby4NCg0KU2kgbGEgY29uZGljacOzbiBlbiBlbCBfd2hpbGVfIGxvb3AgZXMgc2llbXByZSB2ZXJkYWRlcmEsIGVsIGNpY2xvIHdoaWxlIHNlcsOhIHVuIGNpY2xvIGluZmluaXRvIHkgbnVlc3RybyBwcm9ncmFtYSBudW5jYSBkZWphcsOhIGRlIGVqZWN1dGFyc2UuIMKhRXN0byBlcyBhbGdvIHF1ZSBkZWZpbml0aXZhbWVudGUgcXVlcmVtb3MgZXZpdGFyISBBbCBlc2NyaWJpciB1biBjaWNsbyB3aGlsZSBlbiBSLCBxdWVyZW1vcyBhc2VndXJhcm5vcyBkZSBxdWUgZW4gYWxnw7puIG1vbWVudG8gbGEgY29uZGljacOzbiBzZWEgZmFsc2EgcGFyYSBxdWUgZWwgY2ljbG8gZGVqZSBkZSBlamVjdXRhcnNlLg0KDQpWZWFtb3MgZWwgc2lndWllbnRlIGVqZW1wbG8gZG9uZGUgdGVuZW1vcyBsYSB2YXJpYWJsZSBfYcOxb18gcXVlIGVzIGlndWFsIGEgMjAxNSwgeSB1biBfd2hpbGVfIGxvb3AgcXVlIGNvcnJlIHNpZW1wcmUgcXVlIGVsIGHDsW8gc2VhIG1lbm9yIGEgMjAyMS4gUGFyYSBhc2VndXJhcm5vcyBxdWUgc2VhIHVuIGNpY2xvIGZpbml0byB2YW1vcyBhIGlyIHN1bWFuZG9sZSAxIGEgbnVlc3RyYSB2YXJpYWJsZSBhw7FvIGNhZGEgdmV6IHF1ZSBoYWdhIHVuIGNpY2xvLiBBbCBtaXNtbyB0aWVtcG8gaGFjZW1vcyBxdWUgaW1wcmltYSBxdWUgYcOxbyBlcyB5IGN1w6FudG9zIGZhbHRhbiBwYXJhIGVsIDIwMjE6DQoNCmBgYHtyfQ0KYcOxbyA8LSAyMDE1DQp3aGlsZSAoYcOxbyA8IDIwMjEpew0KICAgIHByaW50IChwYXN0ZTAoIkVzIGVsIGHDsW8gIiwgYcOxbywiLiBGYWx0YW4gIiwyMDIxLWHDsW8gLCIgYcOxb3MgcGFyYSBlbCAyMDIxIikpDQogICAgYcOxbyA8LSBhw7FvICsgMQ0KfQ0KYGBgDQoNCk5vIHNlIHByZW9jdXBlIHNpIHRvZG8gZXN0ZSBwcm9jZXNvIHBhcmVjZSBhYnJ1bWFkb3IsIGxvcyBsb29wcyBlbiBSIHJlcXVpZXJlbiB0aWVtcG8gcGFyYSBjb21wcmVuZGVybG9zLCBwZXJvIHNvbiBoZXJyYW1pZW50YXMgcG9kZXJvc2FzIHVuYSB2ZXogcXVlIHNlIGRvbWluYW4uIEhheSBtdWNoYXMgdmFyaWFibGVzIGRpZmVyZW50ZXMgcGFyYSBoYWNlciBtYWxhYmFyZXMsIHBlcm8gbGEgY2xhdmUgcGFyYSBjb21wcmVuZGVyIGVsIGNpY2xvIHdoaWxlIGVzIHNhYmVyIGPDs21vIGNhbWJpYW4gZXN0YXMgdmFyaWFibGVzIGNhZGEgdmV6IHF1ZSBzZSBlamVjdXRhIGVsIGNpY2xvLg0KDQoNCiMjIyMgSWYtRWxzZSBzdGF0ZW1lbnQgZW4gdW4gd2hpbGUgbG9vcA0KDQpBaG9yYSBxdWUgaW1wcmltaW1vcyBlbCBhw7FvIGN1YW5kbyB0b2RhdsOtYSBubyBlcyBlbCAyMDIxLCBhZ3JlZ2FyZW1vcyB1bmEgZnVuY2nDs24gcXVlIGltcHJpbWEgY3VhbmRvIGVmZWN0aXZhbWVudGUgZXMgZWwgMjAyMS4gDQoNClBhcmEgaGFjZXIgZXN0bywgbmVjZXNpdGFyZW1vcyBhZ3JlZ2FyIHVuYSBpbnN0cnVjY2nDs24gaWYtZWxzZSBlbiBudWVzdHJvIGNpY2xvIHdoaWxlLiBBZ3JlZ2FyIHVuYSBpbnN0cnVjY2nDs24gaWYtZWxzZSBlbiB1biBidWNsZSB3aGlsZSBlcyBsbyBtaXNtbyBxdWUgYWdyZWdhcmxhIGEgdW4gZm9yIGxvb3AsIGxvIGN1YWwgeWEgaGVtb3MgaGVjaG8uIA0KDQpFbCBjb25kaWNpb25hbCBpZi1lbHNlIGlyw6EgZW50cmUgbG9zIGNvcmNoZXRlcyBkZWwgd2hpbGUgbG9vcCwgZW4gZWwgbWlzbW8gbHVnYXIgcXVlIGxvIHB1c2ltb3MgZW4gZWwgYnVjbGUgZm9yIGFudGVyaW9ybWVudGUuDQoNCmBgYHtyfQ0KDQphw7FvIDwtIDIwMTUNCndoaWxlIChhw7FvIDw9IDIwMjEpew0KICBpZiAoYcOxbyA8IDIwMjEpew0KICAgIHByaW50IChwYXN0ZTAoIkVzIGVsIGHDsW8gIiwgYcOxbywiLiBGYWx0YW4gIiwyMDIxLWHDsW8gLCIgYcOxb3MgcGFyYSBlbCAyMDIxIikpDQogIH0gZWxzZSB7DQogICAgcHJpbnQoIkVzIGVsIGHDsW8gMjAyMSIpDQogIH0NCiAgYcOxbyA8LSBhw7FvICsgMQ0KfQ0KDQpgYGANCg0KIyMjIyBCcmVha3MgZW4gd2hpbGUgbG9vcA0KDQpEaWdhbW9zIHF1ZSBlbCBuw7ptZXJvIG3DoXhpbW8gZGVsIGHDsW8gcXVlIHNlIHB1ZWRlIGFsY2FuemFyIGVzIDIwMjUsIHBlcm8gY29uIGFsY2FuemFyIDIwMjEgZXMgc3VmaWNpZW50ZSBwYXJhIHRlcm1pbmFyIGVsIGNpY2xvLg0KDQpQYXJhIGhhY2VyIGVzdG8sIHBvZGVtb3MgdXNhciBvdHJhIGRlY2xhcmFjacOzbiBkZSBydXB0dXJhLiBOdWV2YW1lbnRlLCBlc3RvIGZ1bmNpb25hIGRlIGxhIG1pc21hIG1hbmVyYSBlbiB1biBjaWNsbyB3aGlsZSBxdWUgZW4gdW4gY2ljbG8gZm9yOyB1bmEgdmV6IHF1ZSBzZSBjdW1wbGUgbGEgY29uZGljacOzbiB5IHNlIGVqZWN1dGEgbGEgcnVwdHVyYSwgZWwgY2ljbG8gZmluYWxpemEuDQoNCmBgYHtyfQ0KDQphw7FvIDwtIDIwMTUNCndoaWxlIChhw7FvIDw9IDIwMjUpew0KICBpZiAoYcOxbyA8IDIwMjEpew0KICAgIHByaW50IChwYXN0ZTAoIkVzIGVsIGHDsW8gIiwgYcOxbywiLiBGYWx0YW4gIiwyMDIxLWHDsW8gLCIgYcOxb3MgcGFyYSBlbCAyMDIxIikpDQogIH0gZWxzZSB7DQogICAgcHJpbnQoIkVzIGVsIGHDsW8gMjAyMSIpDQogICAgYnJlYWsNCiAgfQ0KICBhw7FvIDwtIGHDsW8gKyAxDQp9DQoNCmBgYA==</div>
 
 
 </div>

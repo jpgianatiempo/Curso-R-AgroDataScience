@@ -163,13 +163,13 @@ efecto_niña <- "-10%"
 efecto_neutral <- "2%"
 efecto_niño <- "5%"
 
-for (pronostic in pronosticos){
-  if (pronostic == "Niña"){
-  print (paste0("Pronóstico ", pronostic, ". El impacto sobre la producción es del ",efecto_niña))
-} else if (pronostic == "Neutral"){
-  print( paste0("Pronóstico ",pronostic,". El impacto sobre la producción es del ",efecto_neutral))
+for (pronostic in names(pronosticos)){
+  if (pronosticos[[pronostic]] == "Niña"){
+  print (paste0("Pronóstico del ", pronostic,": ",pronosticos[[pronostic]] ,". El impacto sobre la producción es del ",efecto_niña))
+} else if (pronosticos[[pronostic]] == "Neutral"){
+  print( paste0("Pronóstico del ", pronostic,": ",pronosticos[[pronostic]] ,". El impacto sobre la producción es del ",efecto_neutral))
 } else {
-  print( paste0("Pronóstico ",pronostic,". El impacto sobre la producción es del ",efecto_niño))
+  print(paste0("Pronóstico del ", pronostic,": ",pronosticos[[pronostic]] ,". El impacto sobre la producción es del ",efecto_niño))
 }
 }
 
@@ -182,14 +182,14 @@ Ahora que hemos agregado una declaración if-else, veamos cómo detener un for l
 Usando el ciclo for que escribimos arriba, podemos insertar la declaración break dentro de nuestra declaración if-else.
 
 ```{r}
-for (pronostic in pronosticos){
-  if (pronostic == "Niña"){
-  print (paste0("Pronóstico ", pronostic, ". El impacto sobre la producción es del ",efecto_niña))
+for (pronostic in names(pronosticos)){
+  if (pronosticos[[pronostic]] == "Niña"){
+  print (paste0("Pronóstico del ", pronostic,": ",pronosticos[[pronostic]] ,". El impacto sobre la producción es del ",efecto_niña))
     break
-} else if (pronostic == "Neutral"){
-  print( paste0("Pronóstico ",pronostic,". El impacto sobre la producción es del ",efecto_neutral))
+} else if (pronosticos[[pronostic]] == "Neutral"){
+  print( paste0("Pronóstico del ", pronostic,": ",pronosticos[[pronostic]] ,". El impacto sobre la producción es del ",efecto_neutral))
 } else {
-  print( paste0("Pronóstico ",pronostic,". El impacto sobre la producción es del ",efecto_niño))
+  print(paste0("Pronóstico del ", pronostic,": ",pronosticos[[pronostic]] ,". El impacto sobre la producción es del ",efecto_niño))
 }
 }
 

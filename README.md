@@ -8,10 +8,9 @@ Descargar instalar estos dos softwares es muy simple ya que son gratuitos. R de 
 
 Ahora [descarguen RStudio](https://rstudio.com/products/rstudio/download/), también van a poder elegir la versión que corresponde según su sistema operativo. RStudio va a identificar automáticamente la versión de R que ya tienen instalada, por lo que es importante que instalen RStudio luego de haber instalado R.
 
-AGREGAR DATAEXPLORER,MARKDOWN, SHINY APPS, REGRESIONES, SERIES DE TIEMPO, REDUCCION DIM, CLUSTERING, ARBOLES, REDES (CAMBIAR EL README TODO!)
 # Programa
 
-## Clase 1: 19-11
+## Clase 1:
 ### Introducción a R y RStudio
 * Descripción del programa “R”. Lógica sintáctica del lenguaje y comandos básicos
 * Presentación de la plataforma RStudio para trabajar en “R”
@@ -26,8 +25,19 @@ AGREGAR DATAEXPLORER,MARKDOWN, SHINY APPS, REGRESIONES, SERIES DE TIEMPO, REDUCC
 - [Práctica Guiada](clase_1/01_practica_guiada.nb.html)
 - [Pŕactica independiente](clase_1/01_practica_independiente.nb.html) 
 
+## Clase 2:
+### Estructuras de control
+* For
+* While
+* If
 
-## Clase 2: 26-11
+### Materiales
+- [Explicación](clase_2_loops_instalacion_paquetes/02_instalacion_paquetes.nb.html)
+- [Práctica Guiada](clase_2_loops_instalacion_paquetes/02_loops.nb.html)
+- [Pŕactica independiente](clase_2_loops_instalacion_paquetes/02_practica_independiente.nb) 
+
+
+## Clase 3:
 ### Tidyverse
 * Limpieza de Base de datos: Renombrar y recodificar variables, tratamiento de valores faltantes (missing values/ NA´s)
 * Seleccionar variables, ordenar y agrupar la base de datos para realizar cálculos
@@ -42,7 +52,7 @@ AGREGAR DATAEXPLORER,MARKDOWN, SHINY APPS, REGRESIONES, SERIES DE TIEMPO, REDUCC
 - [Pŕactica independiente](clase_2/02_practica_independiente.nb.html) 
 
 
-## Clase 3: 02-12
+## Clase 4:
 ### Visualización de la información
 * Gráficos básicos de R (función “plot”): Comandos para la visualización ágil de la información
 * Gráficos elaborados en R (función “ggplot”):
@@ -54,7 +64,7 @@ AGREGAR DATAEXPLORER,MARKDOWN, SHINY APPS, REGRESIONES, SERIES DE TIEMPO, REDUCC
 - [Explicación](clase_3/03_explicacion.nb.html)
 
 
-## Clase 4: 9-12
+## Clase 5:
 ### Mapas en R
 * introducción a GIS
 * Mapas en R: paquetes sf y cartography.
@@ -63,7 +73,7 @@ AGREGAR DATAEXPLORER,MARKDOWN, SHINY APPS, REGRESIONES, SERIES DE TIEMPO, REDUCC
 - [Explicación](clase_4/04_explicacion.nb.html)
 
 
-## Clase extra
+## Clase 6:
 ### Conección SQL Server
 * Conección a SQL Server
 * Paquetes DBI y dbplyr
@@ -71,6 +81,16 @@ AGREGAR DATAEXPLORER,MARKDOWN, SHINY APPS, REGRESIONES, SERIES DE TIEMPO, REDUCC
 
 ### Materiales
 - [Explicación](clase_5/DB_en_R.html)
+
+## Clase 7:
+### RMarkdown
+* ¿Cómo funciona?
+* Code Chunks
+* Code Languages
+* Parámetros
+* Tablas/Gráficos
+* Output Formats
+
 
 
 # Referencias

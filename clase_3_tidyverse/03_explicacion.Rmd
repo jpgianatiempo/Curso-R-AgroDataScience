@@ -279,9 +279,9 @@ Datos_join %>%
 
 El paquete tidyr está pensado para facilitar el emprolijamiento de los datos.
 
-__Gather__ es una función que nos permite pasar los datos de forma horizontal a una forma vertical. 
+__pivot_longer__ es una función que nos permite pasar los datos de forma horizontal a una forma vertical. 
 
-__spread__ es una función que nos permite pasar los datos de forma vertical a una forma horizontal.
+__pivot_wider__ es una función que nos permite pasar los datos de forma vertical a una forma horizontal.
 
 ![fuente: http://www.gis-blog.com/data-management-with-r-tidyr-part-1/](img/spreadVSgather.png)
 
@@ -303,19 +303,20 @@ head(iris)
 #### Gather y Spread
 
 ```{r}
-iris_vertical <- iris %>% gather(., # el . llama a lo que esta atras del %>% 
-                                 key   = Variables,
-                                 value = Valores,
-                                 2:5) #le indico qué columnas juntar
+iris_vertical <- iris %>% pivot_longer(!c(id,Species), #columnas a juntar
+                                       names_to = "Variables", #nombre de las columnas a juntar
+                                       values_to = "Valores") #nombre de la columna con valores
+  
+
 head(iris_vertical)
 ```
 
-Podemos deshacer el __gather__ con un __Spread__
+Podemos deshacer el __pivot_longer__ con un __pivot_wider__
 ```{r}
 iris_horizontal <- iris_vertical %>%
-  spread(. ,
-         key   = Variables, # la llave es la variable que va a dar los nombres de columna
-         value = Valores) # los valores con que se llenan las celdas
+  pivot_wider(. ,
+         names_from = Variables, # la llave es la variable que va a dar los nombres de columna
+         values_from = Valores) # los valores con que se llenan las celdas
 
 head(iris_horizontal)
 ```
@@ -324,7 +325,7 @@ head(iris_horizontal)
 
 El paquete lubridate está pensado para trabajar con los datos tipo fecha (date) o fecha-hora (datetime) para cambiarles el formato, realizar operaciones y extraer información
 
-```{r}
+```{r echo=TRUE, message=FALSE, warning=FALSE}
 #install.packages("lubridate")
 library(lubridate)
 ```
@@ -388,3 +389,14 @@ Tambien podemos conocer el número de semana facilmente.
 week(fecha)
 ```
 
+
+
+
+Existe una forma de agrupar por mes/año una columna tipo fecha y resumir en la suma de esa variable utilizando lubridate
+
+
+```{r}
+data %>% 
+    group_by(month = lubridate::floor_date(date, "month")) %>%
+    summarize(summary_variable = sum(value))
+```

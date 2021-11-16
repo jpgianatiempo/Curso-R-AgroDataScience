@@ -74,15 +74,6 @@ Ahora [descarguen RStudio](https://rstudio.com/products/rstudio/download/), tamb
 
 
 ## Clase 6:
-### Conección SQL Server
-* Conección a SQL Server
-* Paquetes DBI y dbplyr
-* Ejemplos con base ReTAA
-
-### Materiales
-- [Explicación](clase_5/DB_en_R.html)
-
-## Clase 7:
 ### RMarkdown
 * ¿Cómo funciona?
 * Code Chunks

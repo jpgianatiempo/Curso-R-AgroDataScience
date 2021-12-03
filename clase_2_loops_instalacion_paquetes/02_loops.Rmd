@@ -38,6 +38,20 @@ print(paste("Este año es", 2020))
 
 Inmediatamente se puede observar que esto es bastante tedioso: repite el mismo fragmento de código una y otra vez. En este caso, al hacer uso de un loop for en R, puede automatizar la parte repetitiva:
 
+```{r echo=FALSE}
+invisible(library(flow))
+
+fforano <- function(años){
+  for (año in años){
+  print(paste("Este año es", año))
+}
+}
+
+
+flow_view(fforano)
+```
+
+
 ```{r}
 for (año in c(2015,2016,2017,2018,2019,2020)){
   print(paste("Este año es", año))
@@ -73,6 +87,18 @@ La condición de nuestra declaración if debe ser una expresión que se evalúe 
 
 Veamos el ejemplo que mencionamos arriba:
 
+```{r echo=FALSE}
+fpron <- function(pronostico){
+  if (pronostico == "Niña"){
+  print (paste0("El impacto sobre la producción es del ",efecto_niña))
+}
+}
+
+
+flow_view(fpron)
+```
+
+
 ```{r}
 pronostico <- "Niña"
 efecto_niña <- "-10%"
@@ -94,6 +120,19 @@ Si queremos poder manejar ambas ramas condicionales (True y False) agregaremos u
 
 En R, una declaración if-else le dice al programa que ejecute un bloque de código si la declaración condicional es VERDADERA, y un bloque de código diferente si es FALSO. Veamos como quedaría nuestro código if-else:
 
+```{r echo=FALSE}
+fpron2 <- function(pronostico){
+  if (pronostico == "Niña"){
+  print (paste0("El impacto sobre la producción es del ",efecto_niña))
+} else {
+  print( paste0("El impacto sobre la producción es del ",efecto_neutral))
+  }
+}
+
+
+flow_view(fpron2)
+```
+
 ```{r}
 pronostico <- "Neutral"
 efecto_niña <- "-10%"
@@ -114,6 +153,22 @@ Hasta ahora, hemos trabajado bajo el supuesto de que cada una de las decisiones 
 Supongamos que existen posibilidades de que el pronóstico sea un año _Niño_ y este tenga un impacto sobre la producción del 5%. Nuestro último bloque de código no tiene en cuenta esto. 
 
 Afortunadamente, R proporciona una forma de incorporar más de dos ramas en una instrucción if con la palabra clave _else if_. La palabra clave else if proporciona otro bloque de código para usar en una declaración if, y podemos tener tantos como consideremos adecuados. Así nuestro nuevo ejemplo quedaría:
+
+```{r echo=FALSE}
+fpron3 <- function(pronostico){
+if (pronostico == "Niña"){
+  print (paste0("El impacto sobre la producción es del ",efecto_niña))
+} else if (pronostico == "Neutral"){
+  print( paste0("El impacto sobre la producción es del ",efecto_neutral))
+} else {
+  print( paste0("El impacto sobre la producción es del ",efecto_niño))
+}
+}
+
+
+flow_view(fpron3)
+```
+
 
 ```{r}
 
@@ -139,7 +194,7 @@ Ahora que hemos aprendido sobre if-else y for loops en R, podemos llevar las cos
 
 Para combinar dos estructuras de control, colocaremos una estructura de control entre los corchetes {} de otra.
 
-Comenzaremos con estos resultados de partidos para team_A:
+Comenzaremos con estos resultados del ENSO (ojo no son reales):
 
 ```{r}
 pronosticos <- list("2015"="Niño","2016"="Niño","2017"="Niña","2018"="Neutral","2019"="Neutral","2020"="Niña")
@@ -156,6 +211,24 @@ for (pronostic in pronosticos){
 Esta vez, en lugar de imprimir nuestros resultados, agreguemos una declaración if-else en el ciclo for. Continuemos con los ejemplos previos, si el pronóstico es neutral 2%, niña -10% y niño 5%. 
 
 Al indexar en la coincidencia de variables iterables, podemos usar [] o [[]] ya que el iterable es un vector, no una lista.
+
+```{r echo=FALSE}
+fpron4 <- function(pronosticos){
+for (pronostic in names(pronosticos)){
+  if (pronosticos[[pronostic]] == "Niña"){
+  print (paste0("Pronóstico del ", pronostic,": ",pronosticos[[pronostic]] ,". El impacto sobre la producción es del ",efecto_niña))
+} else if (pronosticos[[pronostic]] == "Neutral"){
+  print( paste0("Pronóstico del ", pronostic,": ",pronosticos[[pronostic]] ,". El impacto sobre la producción es del ",efecto_neutral))
+} else {
+  print(paste0("Pronóstico del ", pronostic,": ",pronosticos[[pronostic]] ,". El impacto sobre la producción es del ",efecto_niño))
+}
+}
+}
+
+
+flow_view(fpron4)
+```
+
 
 ```{r}
 pronosticos <- list("2015"="Niño","2016"="Niño","2017"="Niña","2018"="Neutral","2019"="Neutral","2020"="Niña")
@@ -181,6 +254,25 @@ Ahora que hemos agregado una declaración if-else, veamos cómo detener un for l
 
 Usando el ciclo for que escribimos arriba, podemos insertar la declaración break dentro de nuestra declaración if-else.
 
+```{r echo=FALSE}
+fpron5 <- function(pronosticos){
+for (pronostic in names(pronosticos)){
+  if (pronosticos[[pronostic]] == "Niña"){
+  print (paste0("Pronóstico del ", pronostic,": ",pronosticos[[pronostic]] ,". El impacto sobre la producción es del ",efecto_niña))
+    break
+} else if (pronosticos[[pronostic]] == "Neutral"){
+  print( paste0("Pronóstico del ", pronostic,": ",pronosticos[[pronostic]] ,". El impacto sobre la producción es del ",efecto_neutral))
+} else {
+  print(paste0("Pronóstico del ", pronostic,": ",pronosticos[[pronostic]] ,". El impacto sobre la producción es del ",efecto_niño))
+}
+}
+}
+
+
+flow_view(fpron5)
+```
+
+
 ```{r}
 for (pronostic in names(pronosticos)){
   if (pronosticos[[pronostic]] == "Niña"){
@@ -203,6 +295,19 @@ Si la condición en el _while_ loop es siempre verdadera, el ciclo while será u
 
 Veamos el siguiente ejemplo donde tenemos la variable _año_ que es igual a 2015, y un _while_ loop que corre siempre que el año sea menor a 2021. Para asegurarnos que sea un ciclo finito vamos a ir sumandole 1 a nuestra variable año cada vez que haga un ciclo. Al mismo tiempo hacemos que imprima que año es y cuántos faltan para el 2021:
 
+
+```{r echo=FALSE}
+fwhile <- function(año){
+while (año < 2021){
+    print (paste0("Es el año ", año,". Faltan ",2021-año ," años para el 2021"))
+    año <- año + 1
+}
+}
+
+
+flow_view(fwhile)
+```
+
 ```{r}
 año <- 2015
 while (año < 2021){
@@ -221,6 +326,23 @@ Ahora que imprimimos el año cuando todavía no es el 2021, agregaremos una func
 Para hacer esto, necesitaremos agregar una instrucción if-else en nuestro ciclo while. Agregar una instrucción if-else en un bucle while es lo mismo que agregarla a un for loop, lo cual ya hemos hecho. 
 
 El condicional if-else irá entre los corchetes del while loop, en el mismo lugar que lo pusimos en el bucle for anteriormente.
+
+```{r echo=FALSE}
+fwhile2 <- function(año){
+while (año <= 2021){
+  if (año < 2021){
+    print (paste0("Es el año ", año,". Faltan ",2021-año ," años para el 2021"))
+  } else {
+    print("Es el año 2021")
+  }
+  año <- año + 1
+}
+}
+
+
+flow_view(fwhile2)
+```
+
 
 ```{r}
 
@@ -241,6 +363,25 @@ while (año <= 2021){
 Digamos que el número máximo del año que se puede alcanzar es 2025, pero con alcanzar 2021 es suficiente para terminar el ciclo.
 
 Para hacer esto, podemos usar otra declaración de ruptura. Nuevamente, esto funciona de la misma manera en un ciclo while que en un ciclo for; una vez que se cumple la condición y se ejecuta la ruptura, el ciclo finaliza.
+
+```{r echo=FALSE}
+fwhile3 <- function(año){
+while (año <= 2025){
+  if (año < 2021){
+    print (paste0("Es el año ", año,". Faltan ",2021-año ," años para el 2021"))
+  } else {
+    print("Es el año 2021")
+    break
+  }
+  año <- año + 1
+}
+}
+
+
+flow_view(fwhile3)
+```
+
+
 
 ```{r}
 
